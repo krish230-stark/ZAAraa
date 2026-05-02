@@ -2412,6 +2412,27 @@ let cart = {}; // { itemName: { qty, price } }
 const OWNER_PIN = '1234'; // Change this PIN as needed
 let dashLoggedIn = false;
 
+// ─── SUPABASE CONFIG ───
+const SUPABASE_URL = 'https://tqsdrrpukulyefeezrjb.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_TNG3SJ0_o_oqVlUATORrDw_HU-z8Myr';
+
+async function supabaseFetch(path, options = {}) {
+  const res = await fetch(SUPABASE_URL + '/rest/v1/' + path, {
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal'
+    },
+    method: options.method || 'GET',
+    body: options.body ? JSON.stringify(options.body) : undefined
+  });
+  if (!options.method || options.method === 'GET') {
+    try { return await res.json(); } catch { return []; }
+  }
+  return res;
+}
+
 // ─── INIT: extract prices from DOM ───
 function initMenuPrices() {
   document.querySelectorAll('.menu-item').forEach(item => {
@@ -2520,13 +2541,16 @@ function removeFromCart(slug) {
 }
 
 // ─── PLACE ORDER ───
-function placeOrder() {
+async function placeOrder() {
   const name = document.getElementById('custName').value.trim();
   if (!name) {
     document.getElementById('custName').style.borderColor = 'var(--clay)';
     document.getElementById('custName').focus();
     return;
   }
+
+  const btn = document.querySelector('.place-order-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Save ho raha hai...'; }
 
   const phone = document.getElementById('custPhone').value.trim();
   const note  = document.getElementById('custNote').value.trim();
@@ -2545,7 +2569,7 @@ function placeOrder() {
     status: 'new'
   };
 
-  saveOrder(order);
+  await saveOrder(order);
 
   // Clear cart
   Object.keys(cart).forEach(slug => {
@@ -2559,24 +2583,60 @@ function placeOrder() {
   document.getElementById('custPhone').value = '';
   document.getElementById('custNote').value = '';
 
+  if (btn) { btn.disabled = false; btn.textContent = '✅ Order Confirm Karo'; }
   showToast('✅ Order place ho gaya! Shukriya ' + name + ' ji 🙏');
 }
 
-// ─── STORAGE ───
-function loadOrders() {
-  try { return JSON.parse(localStorage.getItem('mkd_orders') || '[]'); }
-  catch { return []; }
+// ─── STORAGE (Supabase) ───
+async function loadOrders() {
+  try {
+    const data = await supabaseFetch('orders?order=created_at.desc');
+    if (!Array.isArray(data)) return [];
+    return data.map(o => ({
+      id: o.order_id,
+      date: o.order_date,
+      time: o.order_time,
+      customer: o.customer,
+      phone: o.phone || '',
+      note: o.note || '',
+      items: typeof o.items === 'string' ? JSON.parse(o.items) : (o.items || []),
+      total: o.total,
+      status: o.status
+    }));
+  } catch(e) { console.error(e); return []; }
 }
-function saveOrder(order) {
-  const orders = loadOrders();
-  orders.unshift(order);
-  localStorage.setItem('mkd_orders', JSON.stringify(orders));
+async function saveOrder(order) {
+  try {
+    const res = await supabaseFetch('orders', {
+      method: 'POST',
+      body: {
+        order_id: String(order.id),
+        customer: order.customer,
+        phone: order.phone || '',
+        note: order.note || '',
+        items: JSON.stringify(order.items),
+        total: order.total,
+        status: order.status,
+        order_date: order.date,
+        order_time: order.time
+      }
+    });
+    if (res && res.status >= 400) {
+      showToast('❌ Order save nahi hua! Dobara try karo.');
+    }
+  } catch(e) {
+    console.error(e);
+    showToast('❌ Order save nahi hua! Internet check karo.');
+  }
 }
-function updateOrderStatus(id, status) {
-  const orders = loadOrders();
-  const o = orders.find(x => x.id === id);
-  if (o) { o.status = status; localStorage.setItem('mkd_orders', JSON.stringify(orders)); }
-  renderDashboard();
+async function updateOrderStatus(id, status) {
+  try {
+    await supabaseFetch('orders?order_id=eq.' + id, {
+      method: 'PATCH',
+      body: { status: status }
+    });
+    renderDashboard().catch(console.error);
+  } catch(e) { console.error(e); }
 }
 
 // ─── TOAST ───
@@ -2590,13 +2650,13 @@ function showToast(msg) {
 // ─── DASHBOARD ───
 function openDashboard() {
   document.getElementById('dashboardOverlay').classList.add('open');
-  renderDashboard();
+  renderDashboard().catch(console.error);
 }
 function closeDashboard() {
   document.getElementById('dashboardOverlay').classList.remove('open');
 }
 
-function renderDashboard() {
+async function renderDashboard() {
   const body = document.getElementById('dashBody');
   if (!dashLoggedIn) {
     body.innerHTML = `
@@ -2611,7 +2671,9 @@ function renderDashboard() {
     return;
   }
 
-  const orders = loadOrders();
+  body.innerHTML = '<div style="color:rgba(255,255,255,0.5);text-align:center;padding:2rem;">⏳ Orders load ho rahe hain...</div>';
+
+  const orders = await loadOrders();
   const todayStr = new Date().toLocaleDateString('en-IN');
   const filterDate = document.getElementById('dashDateFilter')?.value;
   
@@ -2643,7 +2705,7 @@ function renderDashboard() {
       <div class="order-items-list">🍽️ ${itemsList}</div>
       <div class="order-card-footer">
         <span class="order-amount">₹${o.total}</span>
-        <button class="mark-done-btn ${isDone ? 'done' : ''}" onclick="updateOrderStatus(${o.id}, '${isDone ? 'new' : 'done'}')" ${isDone ? '' : ''}>
+        <button class="mark-done-btn ${isDone ? 'done' : ''}" onclick="updateOrderStatus(${o.id}, '${isDone ? 'new' : 'done'}')">
           ${isDone ? '✓ Completed' : 'Mark as Done'}
         </button>
       </div>
@@ -2662,12 +2724,11 @@ function renderDashboard() {
     <div class="date-filter-row">
       <span class="date-filter-label">Filter by Date:</span>
       <input type="date" class="date-filter-input" id="dashDateFilter" onchange="renderDashboard()" value="${filterDate || ''}">
-      <button class="clear-orders-btn" onclick="if(confirm('Saare orders delete karo?')){localStorage.removeItem('mkd_orders');renderDashboard();}">🗑 Clear All</button>
+      <button class="clear-orders-btn" onclick="clearAllOrders()">🗑 Clear All</button>
     </div>
     ${displayOrders.length === 0 ? '<div class="no-orders-msg">Koi order nahi mila 📭</div>' : ordersHtml}
   `;
 
-  // Restore date filter event
   const df = document.getElementById('dashDateFilter');
   if (df) df.addEventListener('change', renderDashboard);
 }
@@ -2676,9 +2737,19 @@ function checkPin() {
   const val = document.getElementById('pinInput')?.value;
   if (val === OWNER_PIN) {
     dashLoggedIn = true;
-    renderDashboard();
+    renderDashboard().catch(console.error);
   } else {
     document.getElementById('pinErr').textContent = '❌ Galat PIN. Dobara try karo.';
+  }
+}
+
+async function clearAllOrders() {
+  if (!confirm('Saare orders delete karo?')) return;
+  try {
+    await supabaseFetch('orders?created_at=gte.2000-01-01', { method: 'DELETE' });
+    renderDashboard().catch(console.error);
+  } catch(e) {
+    showToast('❌ Delete nahi hua.');
   }
 }
 
