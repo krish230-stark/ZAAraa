@@ -1,0 +1,2769 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maa Ka Dhaba – Ludhiana</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Josefin+Sans:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --clay: #C1440E;
+  --turmeric: #E8A020;
+  --smoke: #F5EEE6;
+  --charcoal: #1C1108;
+  --leaf: #3A6B35;
+  --milk: #FDF8F2;
+  --warm-gray: #8B7355;
+  --border: #DDD0BB;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  background: var(--milk);
+  color: var(--charcoal);
+  min-height: 100vh;
+}
+
+/* TOP STRIP */
+.top-strip {
+  background: var(--charcoal);
+  color: var(--turmeric);
+  text-align: center;
+  padding: 8px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* HERO */
+.hero {
+  background: var(--charcoal);
+  padding: 3rem 1.5rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(200,68,14,0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--turmeric);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.hero-label::before, .hero-label::after { content: '–'; opacity: 0.5; }
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 9vw, 5rem);
+  color: var(--smoke);
+  line-height: 1.0;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+.hero h1 em { font-style: italic; color: var(--turmeric); }
+.hero-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 1px;
+  margin-top: 0.8rem;
+}
+
+/* CATEGORY TABS */
+.tab-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--milk);
+  border-bottom: 2px solid var(--border);
+  padding: 0 1rem;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex-shrink: 0;
+  padding: 14px 18px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: -2px;
+  white-space: nowrap;
+}
+.tab-btn:hover { color: var(--clay); }
+.tab-btn.active { color: var(--clay); border-bottom-color: var(--clay); }
+
+/* CATEGORY SECTIONS */
+.menu-section {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.2rem;
+  display: none;
+}
+.menu-section.active { display: block; }
+
+/* Sub-section headers inside merged category */
+.sub-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 1.8rem 0 1rem;
+  padding-bottom: 8px;
+  border-bottom: 2px dashed var(--border);
+}
+.sub-section-header:first-child { margin-top: 0; }
+.sub-icon { font-size: 20px; }
+.sub-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+.sub-count {
+  font-size: 11px;
+  color: var(--warm-gray);
+  letter-spacing: 1px;
+  margin-left: auto;
+}
+
+.cat-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1.5rem;
+}
+.cat-icon-wrap {
+  width: 48px;
+  height: 48px;
+  background: var(--charcoal);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.cat-title { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; line-height: 1; }
+.cat-count { font-size: 12px; color: var(--warm-gray); letter-spacing: 1px; margin-top: 3px; }
+
+/* MENU ITEMS – new card style with photo */
+.menu-list { display: flex; flex-direction: column; gap: 12px; }
+
+.menu-item {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+.menu-item:hover {
+  border-color: var(--clay);
+  box-shadow: -4px 0 0 var(--clay), 0 6px 24px rgba(0,0,0,0.08);
+  transform: translateX(3px);
+}
+.menu-item.expanded { border-color: var(--clay); }
+
+/* Collapsed row */
+.item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.85rem 1rem;
+}
+
+.item-thumb {
+  width: 62px;
+  height: 62px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--smoke);
+}
+
+.item-dot {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--leaf);
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item-dot::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  background: var(--leaf);
+  border-radius: 50%;
+}
+
+.item-body { flex: 1; min-width: 0; }
+.item-name {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.item-tagline {
+  font-size: 11px;
+  color: var(--warm-gray);
+  line-height: 1.3;
+}
+
+.item-right { text-align: right; flex-shrink: 0; }
+.item-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--clay);
+}
+.item-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+.badge-best { background: #FFF0E0; color: var(--clay); }
+.badge-new  { background: #E8F5E9; color: var(--leaf); }
+.badge-spicy{ background: #FFF3E0; color: #E65100; }
+
+/* Expand arrow */
+.expand-arrow {
+  font-size: 9px;
+  color: var(--warm-gray);
+  transition: transform 0.22s;
+  flex-shrink: 0;
+}
+.menu-item.expanded .expand-arrow { transform: rotate(180deg); }
+
+/* ── EXPANDED DETAIL PANEL ── */
+.item-detail {
+  display: none;
+  border-top: 1px dashed var(--border);
+  animation: slideDown 0.22s ease;
+}
+.menu-item.expanded .item-detail { display: block; }
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.detail-photo-wrap {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+}
+.detail-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.detail-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(28,17,8,0.65) 100%);
+}
+.detail-photo-label {
+  position: absolute;
+  bottom: 10px;
+  left: 14px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.detail-body {
+  padding: 1rem 1.1rem 1.1rem;
+}
+.detail-desc {
+  font-size: 13px;
+  color: var(--warm-gray);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.detail-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--smoke);
+  color: var(--warm-gray);
+  border: 1px solid var(--border);
+}
+.detail-tag.green { background: #E8F5E9; color: var(--leaf); border-color: #c8e6c9; }
+.detail-tag.red   { background: #FFF0E0; color: var(--clay); border-color: #ffd5bb; }
+.detail-tag.spicy { background: #FFF3E0; color: #E65100; border-color: #ffe0b2; }
+
+.detail-serves {
+  font-size: 11px;
+  color: var(--warm-gray);
+  letter-spacing: 0.5px;
+}
+.detail-serves strong { color: var(--charcoal); }
+
+/* DIVIDER LINE */
+.menu-divider { height: 1px; background: var(--border); margin: 0.5rem 0; opacity: 0.5; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* FOOTER */
+footer {
+  background: var(--charcoal);
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-top: 2rem;
+}
+footer span { color: var(--turmeric); }
+
+/* SCROLL INDICATOR ON TABS */
+.tab-bar::after {
+  content: '›';
+  position: sticky;
+  right: 0;
+  color: var(--warm-gray);
+  font-size: 18px;
+  align-self: center;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ── FLOATING ACTION BUTTONS ── */
+.fab-group {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 999;
+}
+.fab-btn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 18px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.22);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  white-space: nowrap;
+}
+.fab-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.28); }
+.fab-btn:active { transform: translateY(0); }
+.fab-call      { background: var(--clay); color: #fff; }
+.fab-whatsapp  { background: #25D366; color: #fff; }
+.fab-icon { width: 20px; height: 20px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+
+/* ── LOCATION SECTION ── */
+.location-section {
+  max-width: 720px;
+  margin: 0 auto 0.5rem;
+  padding: 1.5rem 1.2rem;
+}
+.location-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.location-icon-wrap {
+  width: 48px; height: 48px;
+  background: var(--charcoal);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0; margin-top: 2px;
+}
+.location-body { flex: 1; }
+.location-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--turmeric); margin-bottom: 5px; }
+.location-text  { font-size: 14px; font-weight: 600; color: var(--charcoal); line-height: 1.5; margin-bottom: 12px; }
+.maps-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 16px; background: var(--charcoal); color: var(--turmeric);
+  border-radius: 8px; font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+  text-transform: uppercase; text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+.maps-btn:hover { background: var(--clay); color: #fff; transform: translateY(-1px); }
+
+/* Mobile */
+@media (max-width: 480px) {
+  .fab-btn { padding: 12px 15px; font-size: 12px; }
+  .location-card { flex-direction: column; gap: 10px; }
+  .location-icon-wrap { width: 40px; height: 40px; font-size: 18px; border-radius: 10px; }
+  .detail-photo-wrap { height: 150px; }
+  .item-thumb { width: 54px; height: 54px; }
+}
+
+/* ─── ORDER BUTTON ON EACH ITEM ─── */
+.add-order-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 9px 18px;
+  background: var(--clay);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.15s;
+}
+.add-order-btn:hover { background: #a03309; transform: translateY(-1px); }
+.add-order-btn.added { background: var(--leaf); }
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.qty-btn {
+  width: 30px; height: 30px;
+  border: 2px solid var(--clay);
+  background: #fff;
+  color: var(--clay);
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.qty-btn:hover { background: var(--clay); color: #fff; }
+.qty-display {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  min-width: 24px;
+  text-align: center;
+}
+
+/* ─── ORDER CART BUBBLE ─── */
+.cart-bubble {
+  position: fixed;
+  top: 16px; right: 16px;
+  z-index: 1000;
+  background: var(--clay);
+  color: #fff;
+  border-radius: 50px;
+  padding: 10px 18px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(193,68,14,0.45);
+  transition: transform 0.18s;
+  animation: bubblePop 0.3s ease;
+}
+.cart-bubble:hover { transform: scale(1.05); }
+.cart-bubble.visible { display: flex; }
+@keyframes bubblePop {
+  0%   { transform: scale(0.7); opacity: 0; }
+  80%  { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.cart-count-badge {
+  background: #fff;
+  color: var(--clay);
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* ─── ORDER PANEL MODAL ─── */
+.order-overlay {
+  position: fixed; inset: 0;
+  background: rgba(28,17,8,0.7);
+  z-index: 2000;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+}
+.order-overlay.open { display: flex; }
+.order-panel {
+  background: var(--milk);
+  width: 100%;
+  max-width: 680px;
+  max-height: 88vh;
+  border-radius: 24px 24px 0 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+.panel-header {
+  background: var(--charcoal);
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.panel-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--smoke);
+  font-weight: 700;
+}
+.panel-close {
+  background: none; border: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 22px; cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+.panel-close:hover { color: #fff; }
+.panel-body {
+  overflow-y: auto;
+  flex: 1;
+  padding: 1rem 1.2rem;
+}
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.cart-item-name { flex: 1; font-size: 14px; font-weight: 600; }
+.cart-item-qty  { font-size: 13px; color: var(--warm-gray); min-width: 50px; text-align: center; }
+.cart-item-price { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--clay); min-width: 60px; text-align: right; }
+.cart-remove-btn { background: none; border: none; color: var(--warm-gray); font-size: 18px; cursor: pointer; padding: 2px 6px; border-radius: 4px; }
+.cart-remove-btn:hover { color: var(--clay); }
+.cart-empty-msg { text-align: center; padding: 2rem 0; color: var(--warm-gray); font-size: 14px; }
+
+.order-form {
+  padding: 1rem 1.2rem;
+  border-top: 2px solid var(--border);
+  background: #fff;
+  flex-shrink: 0;
+}
+.order-form-title {
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--turmeric);
+  margin-bottom: 10px;
+}
+.form-row { display: flex; gap: 10px; margin-bottom: 10px; }
+.form-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  background: var(--milk);
+  color: var(--charcoal);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.form-input:focus { border-color: var(--clay); }
+.order-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px dashed var(--border);
+  margin-bottom: 12px;
+}
+.order-total-label { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--warm-gray); }
+.order-total-amount { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--charcoal); }
+.place-order-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--leaf);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.15s;
+}
+.place-order-btn:hover { background: #2d5429; transform: translateY(-1px); }
+.place-order-btn:disabled { background: var(--warm-gray); cursor: not-allowed; transform: none; }
+
+/* ─── OWNER DASHBOARD ─── */
+.dashboard-overlay {
+  position: fixed; inset: 0;
+  background: var(--charcoal);
+  z-index: 3000;
+  display: none;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.dashboard-overlay.open { display: flex; }
+.dash-header {
+  background: #111;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
+  position: sticky; top: 0; z-index: 10;
+}
+.dash-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--turmeric); }
+.dash-close-btn {
+  background: rgba(255,255,255,0.08); border: none;
+  color: rgba(255,255,255,0.6); font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; cursor: pointer;
+  padding: 8px 16px; border-radius: 6px;
+  transition: all 0.15s;
+}
+.dash-close-btn:hover { background: var(--clay); color: #fff; }
+.dash-body { flex: 1; padding: 1.5rem; max-width: 800px; margin: 0 auto; width: 100%; }
+
+.dash-login { 
+  display: flex; flex-direction: column; align-items: center; 
+  justify-content: center; min-height: 60vh; gap: 16px;
+  max-width: 340px; margin: 0 auto;
+}
+.dash-login h2 { font-family: 'Playfair Display', serif; color: var(--smoke); font-size: 1.5rem; }
+.dash-login p { color: var(--warm-gray); font-size: 13px; text-align: center; }
+.dash-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  color: #fff;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.dash-input:focus { border-color: var(--turmeric); }
+.dash-login-btn {
+  width: 100%;
+  padding: 13px;
+  background: var(--clay);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.dash-login-btn:hover { background: #a03309; }
+.dash-login-err { color: #ff6b6b; font-size: 12px; }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+.stat-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 1.2rem;
+  text-align: center;
+}
+.stat-val { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--turmeric); }
+.stat-label { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
+
+.dash-section-title {
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--turmeric); font-weight: 700; margin-bottom: 12px;
+  padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.order-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 10px;
+}
+.order-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.order-meta { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; letter-spacing: 0.5px; }
+.order-customer { font-size: 14px; font-weight: 700; color: var(--smoke); }
+.order-status-badge {
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+}
+.status-new    { background: rgba(232,160,32,0.2); color: var(--turmeric); }
+.status-done   { background: rgba(58,107,53,0.3); color: #7bc97a; }
+.order-items-list { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 8px; line-height: 1.7; }
+.order-card-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.07);
+}
+.order-amount { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--turmeric); font-weight: 700; }
+.mark-done-btn {
+  padding: 6px 14px;
+  background: rgba(58,107,53,0.25);
+  border: 1px solid rgba(58,107,53,0.5);
+  color: #7bc97a;
+  border-radius: 6px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.mark-done-btn:hover { background: rgba(58,107,53,0.5); }
+.mark-done-btn.done { background: rgba(58,107,53,0.15); color: rgba(255,255,255,0.2); cursor: default; }
+
+.no-orders-msg { text-align: center; color: rgba(255,255,255,0.25); padding: 2rem 0; font-size: 14px; }
+
+.date-filter-row { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+.date-filter-input {
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px; color: #fff;
+  font-family: 'Josefin Sans', sans-serif; font-size: 13px;
+  outline: none;
+}
+.date-filter-label { font-size: 12px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; }
+.clear-orders-btn {
+  padding: 8px 16px;
+  background: rgba(193,68,14,0.2);
+  border: 1px solid rgba(193,68,14,0.4);
+  color: var(--clay);
+  border-radius: 8px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer;
+  margin-left: auto;
+}
+.clear-orders-btn:hover { background: rgba(193,68,14,0.4); }
+
+/* ─── OWNER DASHBOARD FAB ─── */
+.fab-dashboard {
+  position: fixed;
+  bottom: 24px; left: 20px;
+  z-index: 999;
+  background: var(--charcoal);
+  color: var(--turmeric);
+  border: 2px solid var(--turmeric);
+  border-radius: 50px;
+  padding: 12px 18px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+  transition: all 0.18s;
+}
+.fab-dashboard:hover { background: var(--turmeric); color: var(--charcoal); }
+
+/* ─── SUCCESS TOAST ─── */
+.order-toast {
+  position: fixed; top: 20px; left: 50%;
+  transform: translateX(-50%) translateY(-80px);
+  background: var(--leaf);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.8px;
+  z-index: 9999;
+  transition: transform 0.35s ease;
+  white-space: nowrap;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+}
+.order-toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="top-strip">🍽️ – Ghar Jaisa Khaana</div>
+
+<div class="hero">
+  <div class="hero-label"> &bull; Phagwara, Punjab LPU, Green Valley (Main Gate)</div>
+  <h1>ZAARA<br><em></em></h1>
+  <p class="hero-sub">Taza • Ghar Jaisa • Dil Se Banaya</p>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="showCat('maincourse')">🍛 Main Course</button>
+  <button class="tab-btn" onclick="showCat('veg')">🥬 Veg Khana</button>
+  <button class="tab-btn" onclick="showCat('snacks')">🥙 Snacks</button>
+  <button class="tab-btn" onclick="showCat('fruits')">🍎 Fruits</button>
+  <button class="tab-btn" onclick="showCat('beverages')">🥤 Beverages</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     MAIN COURSE — Paratha + Dal & Roti + Chawal
+     ═══════════════════════════════════════════════ -->
+<div class="menu-section active" id="maincourse">
+  <div class="cat-header">
+    <div class="cat-icon-wrap">🍛</div>
+    <div>
+      <div class="cat-title">Main Course</div>
+      <div class="cat-count">19 items • Paratha · Dal · Roti · Chawal</div>
+    </div>
+  </div>
+
+  <!-- ── Paratha ── -->
+  <div class="sub-section-header">
+    <span class="sub-icon">🫓</span>
+    <span class="sub-title">Paratha</span>
+    <span class="sub-count">8 items • Tawa pe taza</span>
+  </div>
+  <div class="menu-list">
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="allo prantha.jpg" alt="Aloo Paratha" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Aloo Paratha <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Dahi aur makhan ke saath</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">₹30</div>
+          <div class="item-badge badge-best">BEST</div>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="allo prantha.jpg" alt="Aloo Paratha">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Aloo Paratha</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Classic masaledar aloo filling, golden tawa pe seka hua, dahi aur makhan ke saath serve hoga. Har bite mein ghar ki yaad aati hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🧈 Ghee Available</span>
+            <span class="detail-tag red">⭐ Best Seller</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1 person &nbsp;|&nbsp; <strong>Prep:</strong> 5–7 min</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="Gobi-Paratha-.jpg" alt="Gobhi Paratha" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Gobhi Paratha <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Ghee mein seka hua</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹40</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="Gobi-Paratha-.jpg" alt="Gobhi Paratha">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Gobhi Paratha</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Tazi phool gobhi ka masaledar stuffing, ghee mein seka hua. Crispy bahar se, soft andar se – perfect Punjabi breakfast.</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🧈 With Butter</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1 person &nbsp;|&nbsp; <strong>Prep:</strong> 6–8 min</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="download.jpg" alt="Paneer Paratha" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Paneer Paratha <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Dahi ke saath best</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹50</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="download.jpg" alt="Paneer Paratha">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Paneer Paratha</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Taza paneer aur spices se bhara hua paratha – creamy filling har bite mein. Dahi ke saath khao, swad double ho jaata hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🧀 Fresh Paneer</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1 person &nbsp;|&nbsp; <strong>Prep:</strong> 7–10 min</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="mix-veg-paratha.webp" alt="Mix Paratha" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Mix Paratha <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Aloo + Gobhi + Paneer combo</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">₹50</div>
+          <div class="item-badge badge-new">NEW</div>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="mix-veg-paratha.webp" alt="Mix Paratha">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Mix Paratha</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Aloo + Gobhi + Paneer teeno ka combo filling ek hi paratha mein. Decide nahi kar paa rahe? Yeh lo sabka swad ek saath!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag red">🆕 New Item</span>
+            <span class="detail-tag">🧈 Ghee Finish</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1–2 persons &nbsp;|&nbsp; <strong>Prep:</strong> 8–10 min</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="mooli.pranthaa.jpg" alt="Muli Paratha" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Muli Paratha <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Punjabi style</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹40</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="mooli.pranthaa.jpg" alt="Muli Paratha">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Muli Paratha</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Tazi mooli ka masaledar stuffing, Punjabi style mein seka hua. Winter ka favourite – saade aur pure desi swad ke saath.</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">❄️ Winter Special</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1 person &nbsp;|&nbsp; <strong>Prep:</strong> 5–7 min</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="pyaaz prantha.jpg" alt="Pyaaz Paratha" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Pyaaz Paratha <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Chatpata flavor</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹30</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="pyaaz prantha.jpg" alt="Pyaaz Paratha">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Pyaaz Paratha</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Kanda aur hare pyaaz ka chatpata filling, crispy edges ke saath. Simple lagta hai par swad mein kamaal hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🧅 Fresh Onion</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1 person &nbsp;|&nbsp; <strong>Prep:</strong> 5 min</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="methi prantha.jpg" alt="Methi Paratha" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Methi Paratha <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Healthy aur zaiqedaar</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹40</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="methi prantha.jpg" alt="Methi Paratha">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Methi Paratha</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Tazi methi ki patti se bana, healthy aur zaiqedaar. Thodi si kadwahat aur zyada sa pyaar – sehat ke liye bilkul theek!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">💚 Healthy Choice</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1 person &nbsp;|&nbsp; <strong>Prep:</strong> 5–7 min</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="butter prantha.jpg" alt="Butter Paratha" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Butter Paratha <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Makhan ke saath</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹30</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="butter prantha.jpg" alt="Butter Paratha">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Butter Paratha</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Simple saada paratha, upar se taza makhan lagake serve hoga. Chai ke saath khao ya dal ke saath – dono taraf se ek number!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🧈 Makhan Wala</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1 person &nbsp;|&nbsp; <strong>Prep:</strong> 4 min</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /menu-list paratha -->
+
+  <!-- ── Dal & Roti ── -->
+  <div class="sub-section-header">
+    <span class="sub-icon">🍲</span>
+    <span class="sub-title">Dal & Roti</span>
+    <span class="sub-count">6 items • Ghar ka asli swad</span>
+  </div>
+  <div class="menu-list">
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="dal makhani.jpg" alt="Dal Makhani" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Dal Makhani <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Makhan aur cream ke saath</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">₹110</div>
+          <div class="item-badge badge-best">BEST</div>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="dal makhani.jpg" alt="Dal Makhani">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Dal Makhani</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Raat bhar paki kali dal, makhan aur cream ke saath – Maa Ka Dhaba ki signature dish. Slow cooked dum method se banayi jaati hai, rich aur creamy texture ke liye.</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag red">⭐ Signature Dish</span>
+            <span class="detail-tag">🧈 Butter Topped</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1–2 persons &nbsp;|&nbsp; <strong>Pairs with:</strong> Roti / Naan</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src = "dal tadka.jpg" alt="Dal Tadka" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Dal Tadka <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Desi ghee ka tadka</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹90</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="dal tadka.jpg" alt="Dal Tadka">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Dal Tadka</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Arhar/chana dal, desi ghee ka zardaar tadka, lemon squeeze ke saath. Ghar jaisa swad jo dil ko sukoon deta hai.</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🫙 Desi Ghee</span>
+            <span class="detail-tag">🍋 Lemon Squeeze</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1–2 persons &nbsp;|&nbsp; <strong>Pairs with:</strong> Chawal / Roti</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="rajma.jpg" alt="Rajma" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Rajma <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Punjabi style, dum pe paka</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹100</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="rajma.jpg" alt="Rajma">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Rajma</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Punjabi style rajma – thick masaledar gravy, dum pe paka hua. Chawal ke saath khao ya roti ke saath – dono tarah se pure bliss!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag spicy">🌶️ Mildly Spicy</span>
+            <span class="detail-tag">❤️ Punjab Special</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1–2 persons &nbsp;|&nbsp; <strong>Pairs with:</strong> Chawal / Naan</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="tandoori roti.jpg" alt="Tandoori Roti" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Tandoori Roti <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Asli tandoor mein seki</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹15</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="tandoori roti.jpg" alt="Tandoori Roti">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Tandoori Roti</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Asli tandoor mein seki huwi roti – bahar se crispy, andar se soft. Kisi bhi dal ya sabzi ke saath perfect companion.</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🔥 Tandoor Fresh</span>
+          </div>
+          <div class="detail-serves"><strong>Per piece:</strong> ₹15 &nbsp;|&nbsp; <strong>Prep:</strong> 3–4 min</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="butter naan.jpg" alt="Butter Naan" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Butter Naan <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Taza makhan laga ke</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹25</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="butter naan.jpg" alt="Butter Naan">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Butter Naan</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Maida ka fluffy naan, makhan laga ke tandoor se taza nikala. Paneer dishes aur dal makhani ke saath ekdum fatakat combination!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🧈 Butter Glazed</span>
+            <span class="detail-tag">🔥 Tandoor Fresh</span>
+          </div>
+          <div class="detail-serves"><strong>Per piece:</strong> ₹25 &nbsp;|&nbsp; <strong>Prep:</strong> 4–5 min</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="lassi,daltadka.jpg" alt="Lassi Dal Tadka Combo" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Lassi + Dal Tadka Combo <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Poora lunch set</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">₹130</div>
+          <div class="item-badge badge-new">COMBO</div>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="lassi,daltadka.jpg" alt="Combo">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Lassi + Dal Tadka Combo</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Dal tadka + 2 tandoori roti + ek glass meethi lassi – poora lunch ek hi baar mein! Students aur working folks ke liye best value deal.</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag red">💰 Best Value</span>
+            <span class="detail-tag">🍽️ Full Meal</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1 person &nbsp;|&nbsp; <strong>Includes:</strong> Dal + 2 Roti + Lassi</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /menu-list dal-roti -->
+
+  <!-- ── Chawal ── -->
+  <div class="sub-section-header">
+    <span class="sub-icon">🍚</span>
+    <span class="sub-title">Chawal</span>
+    <span class="sub-count">5 items • Basmati ke saath</span>
+  </div>
+  <div class="menu-list">
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="veg pulao.jpg" alt="Veg Pulao" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Veg Pulao <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Khushboodaar basmati</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹100</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="veg pulao.jpg" alt="Veg Pulao">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Veg Pulao</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Seasonal vegetables ke saath khushboodaar basmati pulao – whole spices aur ghee se bana, raita ke saath serve hoga.</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🌾 Basmati Rice</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1–2 persons &nbsp;|&nbsp; <strong>With Raita</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="jeera rice.jpg" alt="Jeera Rice" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Jeera Rice <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Dal ke saath best</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹70</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="jeera rice.jpg" alt="Jeera Rice">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Jeera Rice</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Ghee aur jeera tadke ka plain basmati chawal – light aur aromatic. Dal makhani ya rajma ke saath khao aur din ban jaata hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🌾 Basmati</span>
+            <span class="detail-tag">🫙 Desi Ghee</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1 person &nbsp;|&nbsp; <strong>Pairs with:</strong> Any Dal</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="rajma chawal.jpg" alt="Rajma Chawal" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Rajma Chawal <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Punjab ka comfort food</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">₹130</div>
+          <div class="item-badge badge-best">FAV</div>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="rajma chawal.jpg" alt="Rajma Chawal">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Rajma Chawal</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Punjab ka ultimate comfort food – ghar jaisa rajma upar chawal, pyaaz salad ke saath. Koi bhi sad mood theek kar deta hai yeh combo!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag red">❤️ All-Time Fav</span>
+            <span class="detail-tag">🧅 Onion Salad</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1 person &nbsp;|&nbsp; <strong>Complete Meal</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="chole chawal.jpg" alt="Chole Chawal" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Chole Chawal <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Masaledar Punjabi chole</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹120</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="chole chawal.jpg" alt="Chole Chawal">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Chole Chawal</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Masaledar Punjabi chole – chawal ke upar serve, onion salad ke saath. Spicy chole + fluffy chawal = ek number ka lunch!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag spicy">🌶️ Spicy</span>
+            <span class="detail-tag">🧅 Onion Salad</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1 person &nbsp;|&nbsp; <strong>Complete Meal</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="khichdi.jpg" alt="Khichdi" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Khichdi <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Light meal, ghee ke saath</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹80</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="khichdi.jpg" alt="Khichdi">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Khichdi</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Moong dal khichdi, desi ghee aur achar ke saath – light meal jo stomach ko comfort deta hai. Beemar ho ya khaana halka chahiye – khichdi hi answer hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">💚 Easy to Digest</span>
+            <span class="detail-tag">🫙 Ghee + Pickle</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1 person &nbsp;|&nbsp; <strong>Light & Healthy</strong></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /menu-list chawal -->
+</div><!-- /maincourse -->
+
+
+<!-- VEG KHANA SECTION -->
+<div class="menu-section" id="veg">
+  <div class="cat-header">
+    <div class="cat-icon-wrap">🥬</div>
+    <div>
+      <div class="cat-title">Veg Khana</div>
+      <div class="cat-count">7 items • 100% Vegetarian</div>
+    </div>
+  </div>
+  <div class="menu-list">
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="paneer butter masala.jpg" alt="Paneer Butter Masala" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Paneer Butter Masala <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Makhan wali khushboo</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">₹130</div>
+          <div class="item-badge badge-best">BEST</div>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="paneer butter masala.jpg" alt="Paneer Butter Masala">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Paneer Butter Masala</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Rich tomato-onion gravy mein taza paneer, makhan aur cream ke saath slow cooked. Naan ke saath khao ya chawal ke saath – har baar mann karta hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag red">⭐ Best Seller</span>
+            <span class="detail-tag">🧀 Fresh Paneer</span>
+            <span class="detail-tag">🧈 Butter & Cream</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1–2 persons &nbsp;|&nbsp; <strong>Pairs with:</strong> Naan / Paratha</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="shahi paneer.jpg" alt="Shahi Paneer" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Shahi Paneer <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Kaju cream gravy</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹145</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="shahi paneer.jpg" alt="Shahi Paneer">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Shahi Paneer</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Kaju aur cream ki rich, aromatic gravy mein shahi style paneer. Slightly sweet, mildly spiced – ek premium taste jo pocket friendly hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">👑 Royal Taste</span>
+            <span class="detail-tag">🥜 Kaju Gravy</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1–2 persons &nbsp;|&nbsp; <strong>Pairs with:</strong> Naan / Roti</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="aloo matar.jpg" alt="Aloo Matar" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Aloo Matar <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Ghar jaisi sabzi</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹80</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="aloo matar.jpg" alt="Aloo Matar">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Aloo Matar</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Ghar jaisi aloo matar ki sabzi, gehri masaledar gravy ke saath. Simple hai par dil ko bhata hai – Maa ke haath ka swad!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🏠 Ghar Jaisa</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1–2 persons &nbsp;|&nbsp; <strong>Pairs with:</strong> Roti / Paratha</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="kadai sabzi.jpg" alt="Kadai Sabzi" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Kadai Sabzi <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Smoky aur spicy</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">₹100</div>
+          <div class="item-badge badge-spicy">SPICY</div>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="kadai sabzi.jpg" alt="Kadai Sabzi">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Kadai Sabzi</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Mix vegetables kadai mein bhuni, smoky aur spicy taste. High flame pe cook hoti hai – restaurant style ka swad ghar ke daam pe!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag spicy">🌶️ Spicy</span>
+            <span class="detail-tag">🔥 Kadai Cooked</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1–2 persons &nbsp;|&nbsp; <strong>Pairs with:</strong> Naan / Paratha</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="bindi masala.jpg" alt="Bhindi Masala" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Bhindi Masala <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Tazi bhindi sauteed</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹90</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="bindi masala.jpg" alt="Bhindi Masala">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Bhindi Masala</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Tazi bhindi pyaaz aur spices ke saath sauteed – crispy texture, tangy masala. Simple sabzi jo roti ke saath sab se zyada order hoti hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🧅 Pyaaz Wali</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1–2 persons &nbsp;|&nbsp; <strong>Pairs with:</strong> Roti / Paratha</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="bhaigan bharta.jpg" alt="Baingan Bharta" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Baingan Bharta <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Angar pe bhuna baingan</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹90</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="bhaigan bharta.jpg" alt="Baingan Bharta">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Baingan Bharta</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Angar pe bhuna baingan, desi ghee aur hara dhania ke saath. Smoky aroma jo ek baar naak tak paunche toh reh nahi paate!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🔥 Angaar Roasted</span>
+            <span class="detail-tag">🫙 Desi Ghee</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1–2 persons &nbsp;|&nbsp; <strong>Pairs with:</strong> Roti / Paratha</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="palaak paneer.jpg" alt="Palak Paneer" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Palak Paneer <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Healthy choice</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹120</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="palaak paneer.jpg" alt="Palak Paneer">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Palak Paneer</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Tazi palak puree mein soft paneer cubes – healthy aur delicious dono ek saath. Iron + protein ka perfect combo, Maa ki approved dish!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">💚 Healthy</span>
+            <span class="detail-tag">🧀 Soft Paneer</span>
+          </div>
+          <div class="detail-serves"><strong>Serves:</strong> 1–2 persons &nbsp;|&nbsp; <strong>Pairs with:</strong> Roti / Naan</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SNACKS SECTION -->
+<div class="menu-section" id="snacks">
+  <div class="cat-header">
+    <div class="cat-icon-wrap">🥙</div>
+    <div>
+      <div class="cat-title">Snacks & Chaat</div>
+      <div class="cat-count">6 items • Chatpate munchies</div>
+    </div>
+  </div>
+  <div class="menu-list">
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="somosa.jpg" alt="Samosa" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Samosa (2 pcs) <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Imli chutney ke saath</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹20</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="somosa.jpg" alt="Samosa">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Samosa (2 pcs)</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Crispy aloo stuffed samosa, imli chutney ke saath taza serve hoga. Tea-time ka best saathi – bahar se crunch andar se dhamaka!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🍵 Tea Companion</span>
+          </div>
+          <div class="detail-serves"><strong>2 pieces</strong> per serving</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="chole batura.jpg" alt="Chole Bhature" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Chole Bhature <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Ludhiana special</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">₹80</div>
+          <div class="item-badge badge-best">MUST TRY</div>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="chole batura.jpg" alt="Chole Bhature">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Chole Bhature</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">2 fluffy bhature + spicy chole + pyaaz salad – Ludhiana special! Bhature hote hain phoole hue aur chole hoti hai thick masaledar. Ek baar khao, baar baar aao!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag red">🏆 Must Try</span>
+            <span class="detail-tag spicy">🌶️ Spicy Chole</span>
+          </div>
+          <div class="detail-serves"><strong>Includes:</strong> 2 Bhature + Chole + Salad</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="pav bhaji.jpg" alt="Pav Bhaji" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Pav Bhaji <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Tawa pe masaledar</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹70</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="pav bhaji.jpg" alt="Pav Bhaji">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Pav Bhaji</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Tawa pe masaledar bhaji + 2 buttered pav – ek number taste! Bhaji hoti hai mashed veggies ki, tawa pe ghee mein seki, lemon aur pyaaz ke saath.</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🧈 Buttered Pav</span>
+          </div>
+          <div class="detail-serves"><strong>Includes:</strong> 2 Pav + Bhaji + Garnish</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="papdi chat.jpg" alt="Papdi Chaat" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Papdi Chaat <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Tangy & sweet</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹50</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="papdi chat.jpg" alt="Papdi Chaat">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Papdi Chaat</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Crispy papdi, dahi, tamarind + green chutney, sev – tangy & sweet har ek bite mein mix hote hain. Ek bowl mein pure India ka swad!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🍶 Dahi Wali</span>
+            <span class="detail-tag">🤤 Tangy Sweet</span>
+          </div>
+          <div class="detail-serves"><strong>1 bowl</strong> per serving</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="aloo tikki.jpg" alt="Aloo Tikki" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Aloo Tikki <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Chole aur chutneys ke saath</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹40</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="aloo tikki.jpg" alt="Aloo Tikki">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Aloo Tikki</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Crispy shallow-fried aloo patties, chole aur chutneys ke saath. Golden crust, soft inside – evening snack ka raja!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🥣 With Chole</span>
+          </div>
+          <div class="detail-serves"><strong>2 tikkis</strong> per plate</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="bread pokaora.jpg" alt="Bread Pakora" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Bread Pakora <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Green chutney ke saath</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹30</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="bread pokaora.jpg" alt="Bread Pakora">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Bread Pakora</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Aloo filled bread slices, besan mein dip karke crispy fry kiye, green chutney ke saath serve. Baarish mein chai ke saath – iska koi jawab nahi!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🌧️ Monsoon Fav</span>
+            <span class="detail-tag">🍵 Chai Companion</span>
+          </div>
+          <div class="detail-serves"><strong>2 pieces</strong> per serving</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FRUITS SECTION -->
+<div class="menu-section" id="fruits">
+  <div class="cat-header">
+    <div class="cat-icon-wrap">🍎</div>
+    <div>
+      <div class="cat-title">Taze Phal</div>
+      <div class="cat-count">5 items • Seasonal & Fresh</div>
+    </div>
+  </div>
+  <div class="menu-list">
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="banana.jpg" alt="Fresh Banana" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Fresh banana <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">fresh and healthy </div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">₹5 per piece</div>
+          <div class="item-badge badge-best">POPULAR</div>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="banana.jpg" alt="Fresh banana">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Banana (2 pcs)</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Fresh banana!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">💚 Healthy</span>
+            <span class="detail-tag">🌿 Seasonal</span>
+          </div>
+          <div class="detail-serves"><strong>2 pieces</strong> per serving </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="fruit chat.jpg" alt="Mix Fruits" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Mix Fruits <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Energy ke liye best</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="fruit chat.jpg" alt="Banana">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Fruit Chat</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Taze pake kele – energy ke liye best option. Students ke liye quick bite, gym ke baad perfect, ya bas kuch meetha khaana ho to!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">⚡ Quick Energy</span>
+          </div>
+          <div class="detail-serves"><strong></strong> </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="seasonal fruit.jpg" alt="Seasonal Fruit Plate" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Seasonal Fruit Plate <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Kaat ke plate mein</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹80</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="seasonal fruit.jpg" alt="Seasonal Fruit Plate">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Seasonal Fruit Plate</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Jo bhi season mein taza ho – kaat ke plate mein serve hoga. Variety milegi, freshness guarantee hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">🌿 100% Fresh</span>
+            <span class="detail-tag">🌸 Seasonal</span>
+          </div>
+          <div class="detail-serves"><strong>Full plate</strong> – assorted fruits</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="papaya slice.webp" alt="Papaya Slice" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Papaya Slice <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Digestive ke liye</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹40</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="papaya slice.webp" alt="Papaya Slice">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Papaya Slice</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Paka meetha papita – digestive ke liye perfect, khaane ke baad khao. Vitamins aur enzymes se bharpoor, sehat ke liye ek number!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">💚 Post-Meal Best</span>
+          </div>
+          <div class="detail-serves"><strong>Per plate</strong> – generous portion</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="mango.jpg" alt="Mango" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Mango (Seasonal) <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Season mein taza aam</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">₹60</div>
+          <div class="item-badge badge-new">SEASONAL</div>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="mango.jpg" alt="Mango">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Mango (Seasonal)</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Season mein taza aam – pura kaat ke serve honge. Aam ka sezon aaye aur yeh na khao toh kya faida! Available only in summer season.</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag red">☀️ Summer Only</span>
+            <span class="detail-tag">🥭 Seasonal</span>
+          </div>
+          <div class="detail-serves"><strong>Per plate</strong> – full sliced mango</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- BEVERAGES SECTION -->
+<div class="menu-section" id="beverages">
+  <div class="cat-header">
+    <div class="cat-icon-wrap">🥤</div>
+    <div>
+      <div class="cat-title">Beverages</div>
+      <div class="cat-count">9 items • Thanda & Garam</div>
+    </div>
+  </div>
+  <div class="menu-list">
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="methi lassi.jpg" alt="Meethi Lassi" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Meethi Lassi <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Punjabi style</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">₹50</div>
+          <div class="item-badge badge-best">ICONIC</div>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="methi lassi.jpg" alt="Meethi Lassi">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Meethi Lassi</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Thick dahi ki lassi, rose water aur sugar ke saath – Punjabi style mein banayi. Ek glass peekar heat bhi khatam, thakan bhi khatam!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag red">🏆 Iconic Drink</span>
+            <span class="detail-tag">🌹 Rose Flavour</span>
+          </div>
+          <div class="detail-serves"><strong>300ml</strong> tall glass</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="namkeen lassi.jpg" alt="Namkeen Lassi" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Namkeen Lassi <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Jeera, perfect after meal</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹40</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="namkeen lassi.jpg" alt="Namkeen Lassi">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Namkeen Lassi</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Salted lassi with roasted jeera – perfect digestive drink after a heavy meal. Cool, refreshing, aur stomach ko settle karta hai.</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🌿 Jeera Wali</span>
+            <span class="detail-tag green">💚 Digestive</span>
+          </div>
+          <div class="detail-serves"><strong>250ml</strong> glass</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="masala chai.jpg" alt="Masala Chai" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Masala Chai <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Ek cup peace</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹20</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="masala chai.jpg" alt="Masala Chai">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Masala Chai</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Adrak, elaichi, tulsi wali desi chai – ek cup peace. Subah ho ya shaam, baarish ho ya dhoop – chai toh chahiye hi!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🫚 Adrak Elaichi</span>
+            <span class="detail-tag">☕ Desi Style</span>
+          </div>
+          <div class="detail-serves"><strong>1 cup</strong> (150ml)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="cold coffee.jpg" alt="Cold Coffee" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Cold Coffee <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Blended with ice</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹60</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="cold coffee.jpg" alt="Cold Coffee">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Cold Coffee</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Blended cold coffee with milk and ice, lightly sweetened. Garam din mein instant refreshment – ek baar peete hi mood theek ho jaata hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🧊 Chilled</span>
+            <span class="detail-tag">☕ Coffee</span>
+          </div>
+          <div class="detail-serves"><strong>300ml</strong> blended</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="nimbu pani.jpg" alt="Nimbu Pani" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Nimbu Pani <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Kala namak pudina</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹25</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="nimbu pani.jpg" alt="Nimbu Pani">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Nimbu Pani</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Taze nimbu ka paani, kala namak aur pudina ke saath – summer ka best drink. Fresh, tangy, instant energy booster!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🍋 Fresh Lemon</span>
+            <span class="detail-tag">🌿 Pudina</span>
+          </div>
+          <div class="detail-serves"><strong>250ml</strong> glass</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="coke pepsi.jpg" alt="Cold Drink" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Coca-Cola / Pepsi <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Chilled 300ml bottle</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹30</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="coke pepsi.jpg" alt="Cold Drink">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Coca-Cola / Pepsi</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Chilled cold drink – 300ml bottle. Classic companion for any heavy meal, pizza se paratha tak sab ke saath jaata hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag">🥤 Carbonated</span>
+            <span class="detail-tag">🧊 Ice Cold</span>
+          </div>
+          <div class="detail-serves"><strong>300ml</strong> sealed bottle</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="sprite 7up.jpg" alt="Sprite 7UP" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Sprite / 7UP <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Clear cold drink</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹30</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="sprite 7up.jpg" alt="Sprite 7UP">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Sprite / 7UP</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Chilled clear cold drink – 300ml bottle. Light aur refreshing – oily khaane ke baad sabse zyada order hoti hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag">🥤 Lemon Lime</span>
+            <span class="detail-tag">🧊 Ice Cold</span>
+          </div>
+          <div class="detail-serves"><strong>300ml</strong> sealed bottle</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="mangofruti.jpg" alt="Mango Frooti" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Mango Frooti <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Sab ki favourite</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹20</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="mangofruti.jpg" alt="Mango Frooti">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Mango Frooti</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Chilled Frooti 200ml – sab ki favourite! Chota bachha ho ya bada, Frooti toh sabko pasand hai. Meetha mango swad ek dum fresh!</p>
+          <div class="detail-meta">
+            <span class="detail-tag">🥭 Mango</span>
+            <span class="detail-tag">🧊 Chilled</span>
+          </div>
+          <div class="detail-serves"><strong>200ml</strong> tetra pack</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="mineral water.jpg" alt="Mineral Water" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Mineral Water <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Sealed 500ml bottle</div>
+        </div>
+        <div class="item-right"><div class="item-price">₹15</div></div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="mineral water.jpg" alt="Mineral Water">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Mineral Water</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Sealed mineral water bottle 500ml – fresh aur pure. Khana khaate waqt ya safar mein, paani toh zaroori hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag">💧 Pure Water</span>
+            <span class="detail-tag">🔒 Sealed</span>
+          </div>
+          <div class="detail-serves"><strong>500ml</strong> sealed bottle</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- LOCATION SECTION -->
+<div class="location-section">
+  <div class="location-card">
+    <div class="location-icon-wrap">📍</div>
+    <div class="location-body">
+      <div class="location-label">Our Location</div>
+      <div class="location-text">Green Valley, LPU, Jalandhar, Punjab<br>Green Valley Main Gate</div>
+      <a class="maps-btn"
+         href="https://www.google.com/maps/search/Green+Valley+LPU+Jalandhar+Punjab+Main+Gate"
+         target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+        View on Google Maps
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<!-- CART BUBBLE -->
+<div class="cart-bubble" id="cartBubble" onclick="openOrderPanel()">
+  <span>🛒 Cart</span>
+  <span class="cart-count-badge" id="cartCountBadge">0</span>
+</div>
+
+<!-- ORDER PANEL MODAL -->
+<div class="order-overlay" id="orderOverlay">
+  <div class="order-panel">
+    <div class="panel-header">
+      <div class="panel-title">🛒 Aapka Order</div>
+      <button class="panel-close" onclick="closeOrderPanel()">✕</button>
+    </div>
+    <div class="panel-body" id="orderPanelBody">
+      <div class="cart-empty-msg" id="cartEmptyMsg">Cart khali hai. Menu se items add karo!</div>
+    </div>
+    <div class="order-form" id="orderForm" style="display:none">
+      <div class="order-form-title">📝 Order Details</div>
+      <div class="form-row">
+        <input class="form-input" id="custName" type="text" placeholder="Aapka naam *" required>
+        <input class="form-input" id="custPhone" type="tel" placeholder="Phone (optional)">
+      </div>
+      <input class="form-input" id="custNote" type="text" placeholder="Koi special note?" style="width:100%;margin-bottom:10px">
+      <div class="order-total-row">
+        <span class="order-total-label">Total Amount</span>
+        <span class="order-total-amount" id="orderTotalDisplay">₹0</span>
+      </div>
+      <button class="place-order-btn" onclick="placeOrder()">✅ Order Confirm Karo</button>
+    </div>
+  </div>
+</div>
+
+<!-- OWNER DASHBOARD -->
+<div class="dashboard-overlay" id="dashboardOverlay">
+  <div class="dash-header">
+    <div class="dash-title">🍽️ Owner Dashboard</div>
+    <button class="dash-close-btn" onclick="closeDashboard()">✕ Close</button>
+  </div>
+  <div class="dash-body" id="dashBody">
+    <!-- login shown by JS -->
+  </div>
+</div>
+
+<!-- OWNER FAB -->
+<button class="fab-dashboard" onclick="openDashboard()">👤 Owner Panel</button>
+
+<!-- TOAST -->
+<div class="order-toast" id="orderToast">✅ Order place ho gaya!</div>
+
+<footer>
+  © 2026 <span>Maa Ka Dhaba</span> · Ludhiana, Punjab · Sab ke liye, har din
+</footer>
+
+<!-- FLOATING ACTION BUTTONS -->
+<div class="fab-group">
+  <a class="fab-btn fab-whatsapp"
+     href="https://wa.me/919780898909?text=Hello%2C%20I%20want%20to%20place%20an%20order%20from%20Maa%20Ka%20Dhaba"
+     target="_blank" rel="noopener" aria-label="WhatsApp Order">
+    <span class="fab-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+    </span>
+    WhatsApp Order
+  </a>
+  <a class="fab-btn fab-call" href="tel:9780898909" aria-label="Call Now">
+    <span class="fab-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+    </span>
+    Call Now
+  </a>
+</div>
+
+<script>
+function showCat(id) {
+  document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  event.target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+
+function toggleItem(el) {
+  const isExpanded = el.classList.contains('expanded');
+
+  // Collapse all others in same section
+  el.closest('.menu-list').querySelectorAll('.menu-item.expanded').forEach(item => {
+    item.classList.remove('expanded');
+  });
+
+  // Toggle this one
+  if (!isExpanded) {
+    el.classList.add('expanded');
+    // Smooth scroll into view after expand
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 50);
+  }
+}
+
+// ════════════════════════════════════════════
+//  ORDER MANAGEMENT SYSTEM
+// ════════════════════════════════════════════
+
+// --- MENU DATA (name → price) extracted from DOM ---
+const MENU_PRICES = {};
+
+// Cart state
+let cart = {}; // { itemName: { qty, price } }
+
+// Dashboard auth
+const OWNER_PIN = '1234'; // Change this PIN as needed
+let dashLoggedIn = false;
+
+// ─── SUPABASE CONFIG ───
+const SUPABASE_URL = 'https://tqsdrrpukulyefeezrjb.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_TNG3SJ0_o_oqVlUATORrDw_HU-z8Myr';
+
+async function supabaseFetch(path, options = {}) {
+  const res = await fetch(SUPABASE_URL + '/rest/v1/' + path, {
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal'
+    },
+    method: options.method || 'GET',
+    body: options.body ? JSON.stringify(options.body) : undefined
+  });
+  if (!options.method || options.method === 'GET') {
+    try { return await res.json(); } catch { return []; }
+  }
+  return res;
+}
+
+// ─── INIT: extract prices from DOM ───
+function initMenuPrices() {
+  document.querySelectorAll('.menu-item').forEach(item => {
+    const name = item.querySelector('.item-name')?.childNodes[0]?.textContent?.trim();
+    const priceText = item.querySelector('.item-price')?.textContent?.trim();
+    if (name && priceText) {
+      const price = parseInt(priceText.replace('₹', '').trim()) || 0;
+      if (price > 0) MENU_PRICES[name] = price;
+    }
+  });
+}
+
+// ─── ADD ORDER BUTTONS TO EACH ITEM ───
+function addOrderButtons() {
+  document.querySelectorAll('.menu-item').forEach(item => {
+    const name = item.querySelector('.item-name')?.childNodes[0]?.textContent?.trim();
+    const priceText = item.querySelector('.item-price')?.textContent?.trim();
+    const price = parseInt(priceText?.replace('₹','').trim()) || 0;
+    if (!name || !price) return;
+    const detailBody = item.querySelector('.detail-body');
+    if (!detailBody || detailBody.querySelector('.qty-controls')) return;
+
+    const slug = encodeItemName(name);
+    const controls = document.createElement('div');
+    controls.className = 'qty-controls';
+    controls.id = 'qc_' + slug;
+    controls.innerHTML = `
+      <button class="qty-btn" onclick="event.stopPropagation(); changeQty('${slug}', '${name}', ${price}, -1)">−</button>
+      <span class="qty-display" id="qty_${slug}">0</span>
+      <button class="qty-btn" onclick="event.stopPropagation(); changeQty('${slug}', '${name}', ${price}, 1)">+</button>
+      <span style="font-size:12px;color:var(--warm-gray);margin-left:4px;">Add to Order</span>
+    `;
+    detailBody.appendChild(controls);
+  });
+}
+
+function encodeItemName(name) {
+  return name.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
+}
+
+// ─── CART OPERATIONS ───
+function changeQty(slug, name, price, delta) {
+  if (!cart[slug]) cart[slug] = { name, price, qty: 0 };
+  cart[slug].qty = Math.max(0, cart[slug].qty + delta);
+  if (cart[slug].qty === 0) delete cart[slug];
+
+  const qtyEl = document.getElementById('qty_' + slug);
+  if (qtyEl) qtyEl.textContent = cart[slug]?.qty || 0;
+
+  updateCartBubble();
+}
+
+function updateCartBubble() {
+  const total = Object.values(cart).reduce((s, i) => s + i.qty, 0);
+  const bubble = document.getElementById('cartBubble');
+  document.getElementById('cartCountBadge').textContent = total;
+  if (total > 0) bubble.classList.add('visible');
+  else bubble.classList.remove('visible');
+}
+
+function openOrderPanel() {
+  renderOrderPanel();
+  document.getElementById('orderOverlay').classList.add('open');
+}
+
+function closeOrderPanel() {
+  document.getElementById('orderOverlay').classList.remove('open');
+}
+
+function renderOrderPanel() {
+  const body = document.getElementById('orderPanelBody');
+  const form = document.getElementById('orderForm');
+  const emptyMsg = document.getElementById('cartEmptyMsg');
+  const items = Object.values(cart);
+
+  if (items.length === 0) {
+    body.innerHTML = '<div class="cart-empty-msg">Cart khali hai. Menu se items add karo!</div>';
+    form.style.display = 'none';
+    return;
+  }
+
+  let html = '';
+  let total = 0;
+  items.forEach(item => {
+    const subtotal = item.price * item.qty;
+    total += subtotal;
+    html += `<div class="cart-item-row">
+      <div class="cart-item-name">${item.name}</div>
+      <div class="cart-item-qty">x${item.qty}</div>
+      <div class="cart-item-price">₹${subtotal}</div>
+      <button class="cart-remove-btn" onclick="removeFromCart('${encodeItemName(item.name)}')">🗑</button>
+    </div>`;
+  });
+
+  body.innerHTML = html;
+  form.style.display = 'block';
+  document.getElementById('orderTotalDisplay').textContent = '₹' + total;
+}
+
+function removeFromCart(slug) {
+  const qtyEl = document.getElementById('qty_' + slug);
+  if (qtyEl) qtyEl.textContent = '0';
+  delete cart[slug];
+  updateCartBubble();
+  renderOrderPanel();
+}
+
+// ─── PLACE ORDER ───
+async function placeOrder() {
+  const name = document.getElementById('custName').value.trim();
+  if (!name) {
+    document.getElementById('custName').style.borderColor = 'var(--clay)';
+    document.getElementById('custName').focus();
+    return;
+  }
+
+  const btn = document.querySelector('.place-order-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Save ho raha hai...'; }
+
+  const phone = document.getElementById('custPhone').value.trim();
+  const note  = document.getElementById('custNote').value.trim();
+  const items = Object.values(cart).map(i => ({ name: i.name, qty: i.qty, price: i.price }));
+  const total = items.reduce((s, i) => s + i.qty * i.price, 0);
+
+  const order = {
+    id: Date.now(),
+    date: new Date().toLocaleDateString('en-IN'),
+    time: new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
+    customer: name,
+    phone,
+    note,
+    items,
+    total,
+    status: 'new'
+  };
+
+  await saveOrder(order);
+
+  // Clear cart
+  Object.keys(cart).forEach(slug => {
+    const qtyEl = document.getElementById('qty_' + slug);
+    if (qtyEl) qtyEl.textContent = '0';
+  });
+  cart = {};
+  updateCartBubble();
+  closeOrderPanel();
+  document.getElementById('custName').value = '';
+  document.getElementById('custPhone').value = '';
+  document.getElementById('custNote').value = '';
+
+  if (btn) { btn.disabled = false; btn.textContent = '✅ Order Confirm Karo'; }
+  showToast('✅ Order place ho gaya! Shukriya ' + name + ' ji 🙏');
+}
+
+// ─── STORAGE (Supabase) ───
+async function loadOrders() {
+  try {
+    const data = await supabaseFetch('orders?order=created_at.desc');
+    if (!Array.isArray(data)) return [];
+    return data.map(o => ({
+      id: o.order_id,
+      date: o.order_date,
+      time: o.order_time,
+      customer: o.customer,
+      phone: o.phone || '',
+      note: o.note || '',
+      items: typeof o.items === 'string' ? JSON.parse(o.items) : (o.items || []),
+      total: o.total,
+      status: o.status
+    }));
+  } catch(e) { console.error(e); return []; }
+}
+async function saveOrder(order) {
+  try {
+    const res = await supabaseFetch('orders', {
+      method: 'POST',
+      body: {
+        order_id: String(order.id),
+        customer: order.customer,
+        phone: order.phone || '',
+        note: order.note || '',
+        items: JSON.stringify(order.items),
+        total: order.total,
+        status: order.status,
+        order_date: order.date,
+        order_time: order.time
+      }
+    });
+    if (res && res.status >= 400) {
+      showToast('❌ Order save nahi hua! Dobara try karo.');
+    }
+  } catch(e) {
+    console.error(e);
+    showToast('❌ Order save nahi hua! Internet check karo.');
+  }
+}
+async function updateOrderStatus(id, status) {
+  try {
+    await supabaseFetch('orders?order_id=eq.' + id, {
+      method: 'PATCH',
+      body: { status: status }
+    });
+    renderDashboard().catch(console.error);
+  } catch(e) { console.error(e); }
+}
+
+// ─── TOAST ───
+function showToast(msg) {
+  const t = document.getElementById('orderToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ─── DASHBOARD ───
+function openDashboard() {
+  document.getElementById('dashboardOverlay').classList.add('open');
+  renderDashboard().catch(console.error);
+}
+function closeDashboard() {
+  document.getElementById('dashboardOverlay').classList.remove('open');
+}
+
+async function renderDashboard() {
+  const body = document.getElementById('dashBody');
+  if (!dashLoggedIn) {
+    body.innerHTML = `
+      <div class="dash-login">
+        <h2>🔐 Owner Login</h2>
+        <p>Apna PIN enter karo dashboard access karne ke liye</p>
+        <input class="dash-input" type="password" id="pinInput" placeholder="Enter PIN" onkeydown="if(event.key==='Enter')checkPin()">
+        <button class="dash-login-btn" onclick="checkPin()">Login</button>
+        <div class="dash-login-err" id="pinErr"></div>
+        <p style="color:rgba(255,255,255,0.2);font-size:11px;margin-top:8px;">Default PIN: 1234</p>
+      </div>`;
+    return;
+  }
+
+  body.innerHTML = '<div style="color:rgba(255,255,255,0.5);text-align:center;padding:2rem;">⏳ Orders load ho rahe hain...</div>';
+
+  const orders = await loadOrders();
+  const todayStr = new Date().toLocaleDateString('en-IN');
+  const filterDate = document.getElementById('dashDateFilter')?.value;
+  
+  let displayOrders = orders;
+  if (filterDate) {
+    const fd = new Date(filterDate).toLocaleDateString('en-IN');
+    displayOrders = orders.filter(o => o.date === fd);
+  }
+
+  const todayOrders = orders.filter(o => o.date === todayStr);
+  const todayRevenue = todayOrders.reduce((s, o) => s + o.total, 0);
+  const todayCount = todayOrders.length;
+  const totalRevenue = orders.reduce((s, o) => s + o.total, 0);
+  const pendingCount = todayOrders.filter(o => o.status === 'new').length;
+
+  let ordersHtml = '';
+  displayOrders.forEach(o => {
+    const itemsList = o.items.map(i => `${i.name} × ${i.qty}`).join(', ');
+    const isDone = o.status === 'done';
+    ordersHtml += `
+    <div class="order-card">
+      <div class="order-card-top">
+        <div>
+          <div class="order-customer">👤 ${o.customer}${o.phone ? ' · ' + o.phone : ''}</div>
+          <div class="order-meta">${o.date} at ${o.time}${o.note ? ' · Note: ' + o.note : ''}</div>
+        </div>
+        <span class="order-status-badge ${isDone ? 'status-done' : 'status-new'}">${isDone ? '✓ Done' : '⏳ New'}</span>
+      </div>
+      <div class="order-items-list">🍽️ ${itemsList}</div>
+      <div class="order-card-footer">
+        <span class="order-amount">₹${o.total}</span>
+        <button class="mark-done-btn ${isDone ? 'done' : ''}" onclick="updateOrderStatus(${o.id}, '${isDone ? 'new' : 'done'}')">
+          ${isDone ? '✓ Completed' : 'Mark as Done'}
+        </button>
+      </div>
+    </div>`;
+  });
+
+  body.innerHTML = `
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-val">${todayCount}</div><div class="stat-label">Today's Orders</div></div>
+      <div class="stat-card"><div class="stat-val">₹${todayRevenue}</div><div class="stat-label">Today's Revenue</div></div>
+      <div class="stat-card"><div class="stat-val">${pendingCount}</div><div class="stat-label">Pending</div></div>
+      <div class="stat-card"><div class="stat-val">₹${totalRevenue}</div><div class="stat-label">Total Revenue</div></div>
+    </div>
+
+    <div class="dash-section-title">📋 All Orders</div>
+    <div class="date-filter-row">
+      <span class="date-filter-label">Filter by Date:</span>
+      <input type="date" class="date-filter-input" id="dashDateFilter" onchange="renderDashboard()" value="${filterDate || ''}">
+      <button class="clear-orders-btn" onclick="clearAllOrders()">🗑 Clear All</button>
+    </div>
+    ${displayOrders.length === 0 ? '<div class="no-orders-msg">Koi order nahi mila 📭</div>' : ordersHtml}
+  `;
+
+  const df = document.getElementById('dashDateFilter');
+  if (df) df.addEventListener('change', renderDashboard);
+}
+
+function checkPin() {
+  const val = document.getElementById('pinInput')?.value;
+  if (val === OWNER_PIN) {
+    dashLoggedIn = true;
+    renderDashboard().catch(console.error);
+  } else {
+    document.getElementById('pinErr').textContent = '❌ Galat PIN. Dobara try karo.';
+  }
+}
+
+async function clearAllOrders() {
+  if (!confirm('Saare orders delete karo?')) return;
+  try {
+    await supabaseFetch('orders?created_at=gte.2000-01-01', { method: 'DELETE' });
+    renderDashboard().catch(console.error);
+  } catch(e) {
+    showToast('❌ Delete nahi hua.');
+  }
+}
+
+// ─── CLOSE PANELS ON BACKDROP CLICK ───
+document.getElementById('orderOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeOrderPanel();
+});
+
+// ─── INIT ───
+document.addEventListener('DOMContentLoaded', function() {
+  initMenuPrices();
+  addOrderButtons();
+});
+
+</script>
+</body>
+</html>
