@@ -2933,8 +2933,25 @@ document.getElementById('orderOverlay').addEventListener('click', function(e) {
 document.addEventListener('DOMContentLoaded', function() {
   initMenuPrices();
   addOrderButtons();
+  applyFruitPricesToMenu();
 });
 
 </script>
+  <div class="fruit-popup-overlay" id="fruitPopupOverlay" onclick="if(event.target===this)closeFruitEdit()">
+  <div class="fruit-popup-box">
+    <div class="fruit-popup-emoji" id="fpEmoji">🍎</div>
+    <div class="fruit-popup-title" id="fpTitle">Fruit Name</div>
+    <div class="fruit-popup-sub">Naya price enter karo</div>
+    <div class="fruit-popup-input-wrap">
+      <span class="fruit-popup-rs">₹</span>
+      <input class="fruit-popup-input" id="fpInput" type="text" placeholder="jaise 50" onkeydown="if(event.key==='Enter')saveFruitEditPopup()">
+    </div>
+    <div class="fruit-popup-btns">
+      <button class="fruit-popup-cancel" onclick="closeFruitEdit()">Cancel</button>
+      <button class="fruit-popup-save" onclick="saveFruitEditPopup()">✅ Save</button>
+    </div>
+  </div>
+</div>
+  
 </body>
 </html>
