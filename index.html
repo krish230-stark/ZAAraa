@@ -891,6 +891,111 @@ footer span { color: var(--turmeric); }
   transition: all 0.18s;
 }
 .fruit-edit-btn:hover { background: var(--turmeric); color: #fff; border-color: var(--turmeric); }
+/* ─── INLINE VEG PRICE EDIT ─── */
+.veg-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 5px;
+  padding: 4px 10px;
+  background: #f0fdf0;
+  border: 1.5px dashed var(--leaf);
+  border-radius: 20px;
+  color: var(--leaf);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.veg-edit-btn:hover { background: var(--leaf); color: #fff; border-color: var(--leaf); }
+
+/* ─── VEG PRICE POPUP OVERLAY ─── */
+.veg-popup-overlay {
+  position: fixed; inset: 0;
+  background: rgba(28,17,8,0.6);
+  z-index: 5000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  padding: 20px;
+}
+.veg-popup-overlay.open { display: flex; }
+.veg-popup-box {
+  background: var(--milk);
+  border-radius: 20px;
+  padding: 1.8rem 1.5rem;
+  width: 100%;
+  max-width: 340px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  animation: popIn 0.22s ease;
+}
+.veg-popup-emoji { font-size: 2.5rem; margin-bottom: 0.3rem; }
+.veg-popup-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+.veg-popup-sub {
+  font-size: 12px;
+  color: var(--warm-gray);
+  margin-bottom: 1.2rem;
+}
+.veg-popup-input-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 1.2rem;
+}
+.veg-popup-rs {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--leaf);
+}
+.veg-popup-input {
+  width: 130px;
+  padding: 10px 12px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  text-align: center;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.veg-popup-input:focus { border-color: var(--leaf); }
+.veg-popup-btns { display: flex; gap: 10px; }
+.veg-popup-save {
+  flex: 1; padding: 12px;
+  background: var(--leaf); color: #fff;
+  border: none; border-radius: 10px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer; transition: background 0.18s;
+}
+.veg-popup-save:hover { background: #2d5429; }
+.veg-popup-cancel {
+  flex: 1; padding: 12px;
+  background: var(--smoke); color: var(--warm-gray);
+  border: 1px solid var(--border); border-radius: 10px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer; transition: background 0.18s;
+}
+.veg-popup-cancel:hover { background: var(--border); }
+
 
 /* ─── FRUIT PRICE POPUP OVERLAY ─── */
 .fruit-popup-overlay {
@@ -2346,6 +2451,293 @@ footer span { color: var(--turmeric); }
   </div>
 </div>
 
+  <!-- VEGETABLES SECTION -->
+<div class="menu-section" id="vegetables">
+  <div class="cat-header">
+    <div class="cat-icon-wrap">🥦</div>
+    <div>
+      <div class="cat-title">Tazi Sabziyan</div>
+      <div class="cat-count">9 items • Daily Fresh Vegetables</div>
+    </div>
+  </div>
+  <div class="menu-list">
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="aloo.jpg" alt="Aloo" loading="lazy" onerror="this.style.background='#f5f0e8';this.style.fontSize='2rem';this.alt='🥔'">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Aloo (Potato) <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Sabse popular sabzi</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price" data-veg-key="aloo">₹30</div>
+          <button class="veg-edit-btn" onclick="event.stopPropagation(); openVegEdit('aloo','Aloo (Potato)','🥔')">✏️ Edit Price</button>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="aloo.jpg" alt="Aloo" onerror="this.style.display='none'">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Aloo – per kg</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Taza aur saaf aloo – roz ki sabzi ka base. Sabzi, paratha, chaat sab mein kaam aata hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">⭐ Daily Use</span>
+          </div>
+          <div class="detail-serves"><strong>Per kg</strong> – fresh stock daily</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="gazar.jpg" alt="Gazar" loading="lazy" onerror="this.style.background='#fff0e8'">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Gazar (Carrot) <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Meethi aur crunchy</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price" data-veg-key="gazar">₹40</div>
+          <button class="veg-edit-btn" onclick="event.stopPropagation(); openVegEdit('gazar','Gazar (Carrot)','🥕')">✏️ Edit Price</button>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="gazar.jpg" alt="Gazar" onerror="this.style.display='none'">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Gazar – per kg</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Taza narangi gazar – halwa ke liye perfect, salad aur sabzi mein bhi kaam aata hai. Vitamins se bharpoor!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">💚 Vitamin A</span>
+          </div>
+          <div class="detail-serves"><strong>Per kg</strong> – fresh daily</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="pyaz.jpg" alt="Pyaz" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Pyaz (Onion) <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Har sabzi ka aadhar</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price" data-veg-key="pyaz">₹35</div>
+          <button class="veg-edit-btn" onclick="event.stopPropagation(); openVegEdit('pyaz','Pyaz (Onion)','🧅')">✏️ Edit Price</button>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="pyaz.jpg" alt="Pyaz" onerror="this.style.display='none'">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Pyaz – per kg</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Hari pyaz ya sukhi – sabzi ka swad badha deti hai. Roz ki zaroorat, taza stock available!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">⭐ Essential</span>
+          </div>
+          <div class="detail-serves"><strong>Per kg</strong> – fresh stock</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="lasan.jpg" alt="Lasan" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Lasan (Garlic) <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Khushbu aur sehat</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price" data-veg-key="lasan">₹20</div>
+          <div class="item-badge badge-best">HEALTHY</div>
+          <button class="veg-edit-btn" onclick="event.stopPropagation(); openVegEdit('lasan','Lasan (Garlic)','🧄')">✏️ Edit Price</button>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="lasan.jpg" alt="Lasan" onerror="this.style.display='none'">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Lasan – per 100g</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Taza lasan – immunity boost karta hai, khane mein zabardast flavor laata hai. Ayurvedic fayde bhi hain!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">💪 Immunity Boost</span>
+          </div>
+          <div class="detail-serves"><strong>Per 100g</strong> – taza pori</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="adrak.jpg" alt="Adrak" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Adrak (Ginger) <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Chai aur sabzi ka zaroori</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price" data-veg-key="adrak">₹25</div>
+          <button class="veg-edit-btn" onclick="event.stopPropagation(); openVegEdit('adrak','Adrak (Ginger)','🫚')">✏️ Edit Price</button>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="adrak.jpg" alt="Adrak" onerror="this.style.display='none'">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Adrak – per 100g</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Taza adrak – chai ka swaad badha do, ya sabzi mein dal do. Sardi-khansi mein bhi kaam aata hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">🌿 Ayurvedic</span>
+          </div>
+          <div class="detail-serves"><strong>Per 100g</strong> – fresh ginger</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="bhindi.jpg" alt="Bhindi" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Bhindi (Lady Finger) <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Crispy fry ya masala</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price" data-veg-key="bhindi">₹50</div>
+          <button class="veg-edit-btn" onclick="event.stopPropagation(); openVegEdit('bhindi','Bhindi (Lady Finger)','🫛')">✏️ Edit Price</button>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="bhindi.jpg" alt="Bhindi" onerror="this.style.display='none'">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Bhindi – per kg</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Tazi hari bhindi – fry karo ya masala banao. Diabetics ke liye bhi best, fiber se bharpoor!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">💚 Diabetic Friendly</span>
+          </div>
+          <div class="detail-serves"><strong>Per kg</strong> – seasonal fresh</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="palak.jpg" alt="Palak" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Palak (Spinach) <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Iron aur vitamins</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price" data-veg-key="palak">₹30</div>
+          <div class="item-badge badge-best">HEALTHY</div>
+          <button class="veg-edit-btn" onclick="event.stopPropagation(); openVegEdit('palak','Palak (Spinach)','🥬')">✏️ Edit Price</button>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="palak.jpg" alt="Palak" onerror="this.style.display='none'">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Palak – per bundle</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Hara taza palak – palak paneer, dal palak ya saag. Iron aur vitamins ka khazana, roz khao sehatmand raho!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">💪 Iron Rich</span>
+          </div>
+          <div class="detail-serves"><strong>Per bundle</strong> – fresh green</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="tamatar.jpg" alt="Tamatar" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Tamatar (Tomato) <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Chatni se gravy tak</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price" data-veg-key="tamatar">₹30</div>
+          <button class="veg-edit-btn" onclick="event.stopPropagation(); openVegEdit('tamatar','Tamatar (Tomato)','🍅')">✏️ Edit Price</button>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="tamatar.jpg" alt="Tamatar" onerror="this.style.display='none'">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Tamatar – per kg</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Lal taza tamatar – chatni, gravy, salad sab ke liye perfect. Vitamin C aur antioxidants se bhara!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">💊 Vitamin C</span>
+          </div>
+          <div class="detail-serves"><strong>Per kg</strong> – fresh & ripe</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="methi.jpg" alt="Methi" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Methi (Fenugreek) <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Paratha aur sabzi</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price" data-veg-key="methi">₹20</div>
+          <div class="item-badge badge-new">SEASONAL</div>
+          <button class="veg-edit-btn" onclick="event.stopPropagation(); openVegEdit('methi','Methi (Fenugreek)','🌿')">✏️ Edit Price</button>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="methi.jpg" alt="Methi" onerror="this.style.display='none'">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Methi – per bundle</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Hari tazi methi – methi paratha, aloo methi sabzi sab ke liye. Diabetes mein bhi helpful, sehat ka khazana!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag">🌿 Seasonal</span>
+          </div>
+          <div class="detail-serves"><strong>Per bundle</strong> – fresh greens</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 <!-- BEVERAGES SECTION -->
 <div class="menu-section" id="beverages">
@@ -2716,16 +3108,11 @@ function showCat(id) {
 
 function toggleItem(el) {
   const isExpanded = el.classList.contains('expanded');
-
-  // Collapse all others in same section
   el.closest('.menu-list').querySelectorAll('.menu-item.expanded').forEach(item => {
     item.classList.remove('expanded');
   });
-
-  // Toggle this one
   if (!isExpanded) {
     el.classList.add('expanded');
-    // Smooth scroll into view after expand
     setTimeout(() => {
       el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }, 50);
@@ -2735,18 +3122,32 @@ function toggleItem(el) {
 // ════════════════════════════════════════════
 //  ORDER MANAGEMENT SYSTEM
 // ════════════════════════════════════════════
-
-// --- MENU DATA (name → price) extracted from DOM ---
 const MENU_PRICES = {};
-
-// Cart state
-let cart = {}; // { itemName: { qty, price } }
-
-// Dashboard auth
-const OWNER_PIN = '1234'; // Change this PIN as needed
+let cart = {};
+const OWNER_PIN = '1234';
 let dashLoggedIn = false;
 
-// ─── INIT: extract prices from DOM ───
+// ─── SUPABASE CONFIG ───
+const SUPABASE_URL = 'https://tqsdrrpukulyefeezrjb.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_TNG3SJ0_o_oqVlUATORrDw_HU-z8Myr';
+
+async function supabaseFetch(path, options = {}) {
+  const res = await fetch(SUPABASE_URL + '/rest/v1/' + path, {
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal'
+    },
+    method: options.method || 'GET',
+    body: options.body ? JSON.stringify(options.body) : undefined
+  });
+  if (!options.method || options.method === 'GET') {
+    try { return await res.json(); } catch { return []; }
+  }
+  return res;
+}
+
 function initMenuPrices() {
   document.querySelectorAll('.menu-item').forEach(item => {
     const name = item.querySelector('.item-name')?.childNodes[0]?.textContent?.trim();
@@ -2758,7 +3159,6 @@ function initMenuPrices() {
   });
 }
 
-// ─── ADD ORDER BUTTONS TO EACH ITEM ───
 function addOrderButtons() {
   document.querySelectorAll('.menu-item').forEach(item => {
     const name = item.querySelector('.item-name')?.childNodes[0]?.textContent?.trim();
@@ -2791,10 +3191,8 @@ function changeQty(slug, name, price, delta) {
   if (!cart[slug]) cart[slug] = { name, price, qty: 0 };
   cart[slug].qty = Math.max(0, cart[slug].qty + delta);
   if (cart[slug].qty === 0) delete cart[slug];
-
   const qtyEl = document.getElementById('qty_' + slug);
   if (qtyEl) qtyEl.textContent = cart[slug]?.qty || 0;
-
   updateCartBubble();
 }
 
@@ -2818,7 +3216,6 @@ function closeOrderPanel() {
 function renderOrderPanel() {
   const body = document.getElementById('orderPanelBody');
   const form = document.getElementById('orderForm');
-  const emptyMsg = document.getElementById('cartEmptyMsg');
   const items = Object.values(cart);
 
   if (items.length === 0) {
@@ -2854,13 +3251,16 @@ function removeFromCart(slug) {
 }
 
 // ─── PLACE ORDER ───
-function placeOrder() {
+async function placeOrder() {
   const name = document.getElementById('custName').value.trim();
   if (!name) {
     document.getElementById('custName').style.borderColor = 'var(--clay)';
     document.getElementById('custName').focus();
     return;
   }
+
+  const btn = document.querySelector('.place-order-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Save ho raha hai...'; }
 
   const phone = document.getElementById('custPhone').value.trim();
   const note  = document.getElementById('custNote').value.trim();
@@ -2871,17 +3271,11 @@ function placeOrder() {
     id: Date.now(),
     date: new Date().toLocaleDateString('en-IN'),
     time: new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
-    customer: name,
-    phone,
-    note,
-    items,
-    total,
-    status: 'new'
+    customer: name, phone, note, items, total, status: 'new'
   };
 
-  saveOrder(order);
+  await saveOrder(order);
 
-  // Clear cart
   Object.keys(cart).forEach(slug => {
     const qtyEl = document.getElementById('qty_' + slug);
     if (qtyEl) qtyEl.textContent = '0';
@@ -2893,24 +3287,62 @@ function placeOrder() {
   document.getElementById('custPhone').value = '';
   document.getElementById('custNote').value = '';
 
+  if (btn) { btn.disabled = false; btn.textContent = '✅ Order Confirm Karo'; }
   showToast('✅ Order place ho gaya! Shukriya ' + name + ' ji 🙏');
 }
 
-// ─── STORAGE ───
-function loadOrders() {
-  try { return JSON.parse(localStorage.getItem('mkd_orders') || '[]'); }
-  catch { return []; }
+// ─── STORAGE (Supabase) ───
+async function loadOrders() {
+  try {
+    const data = await supabaseFetch('orders?order=created_at.desc');
+    if (!Array.isArray(data)) return [];
+    return data.map(o => ({
+      id: o.order_id,
+      date: o.order_date,
+      time: o.order_time,
+      customer: o.customer,
+      phone: o.phone || '',
+      note: o.note || '',
+      items: typeof o.items === 'string' ? JSON.parse(o.items) : (o.items || []),
+      total: o.total,
+      status: o.status
+    }));
+  } catch(e) { console.error(e); return []; }
 }
-function saveOrder(order) {
-  const orders = loadOrders();
-  orders.unshift(order);
-  localStorage.setItem('mkd_orders', JSON.stringify(orders));
+
+async function saveOrder(order) {
+  try {
+    const res = await supabaseFetch('orders', {
+      method: 'POST',
+      body: {
+        order_id: String(order.id),
+        customer: order.customer,
+        phone: order.phone || '',
+        note: order.note || '',
+        items: JSON.stringify(order.items),
+        total: order.total,
+        status: order.status,
+        order_date: order.date,
+        order_time: order.time
+      }
+    });
+    if (res && res.status >= 400) {
+      showToast('❌ Order save nahi hua! Dobara try karo.');
+    }
+  } catch(e) {
+    console.error(e);
+    showToast('❌ Order save nahi hua! Internet check karo.');
+  }
 }
-function updateOrderStatus(id, status) {
-  const orders = loadOrders();
-  const o = orders.find(x => x.id === id);
-  if (o) { o.status = status; localStorage.setItem('mkd_orders', JSON.stringify(orders)); }
-  renderDashboard();
+
+async function updateOrderStatus(id, status) {
+  try {
+    await supabaseFetch('orders?order_id=eq.' + id, {
+      method: 'PATCH',
+      body: { status: status }
+    });
+    renderDashboard().catch(console.error);
+  } catch(e) { console.error(e); }
 }
 
 // ─── TOAST ───
@@ -2924,13 +3356,13 @@ function showToast(msg) {
 // ─── DASHBOARD ───
 function openDashboard() {
   document.getElementById('dashboardOverlay').classList.add('open');
-  renderDashboard();
+  renderDashboard().catch(console.error);
 }
 function closeDashboard() {
   document.getElementById('dashboardOverlay').classList.remove('open');
 }
 
-function renderDashboard() {
+async function renderDashboard() {
   const body = document.getElementById('dashBody');
   if (!dashLoggedIn) {
     body.innerHTML = `
@@ -2945,10 +3377,12 @@ function renderDashboard() {
     return;
   }
 
-  const orders = loadOrders();
+  body.innerHTML = '<div style="color:rgba(255,255,255,0.5);text-align:center;padding:2rem;">⏳ Orders load ho rahe hain...</div>';
+
+  const orders = await loadOrders();
   const todayStr = new Date().toLocaleDateString('en-IN');
   const filterDate = document.getElementById('dashDateFilter')?.value;
-  
+
   let displayOrders = orders;
   if (filterDate) {
     const fd = new Date(filterDate).toLocaleDateString('en-IN');
@@ -2977,7 +3411,7 @@ function renderDashboard() {
       <div class="order-items-list">🍽️ ${itemsList}</div>
       <div class="order-card-footer">
         <span class="order-amount">₹${o.total}</span>
-        <button class="mark-done-btn ${isDone ? 'done' : ''}" onclick="updateOrderStatus(${o.id}, '${isDone ? 'new' : 'done'}')" ${isDone ? '' : ''}>
+        <button class="mark-done-btn ${isDone ? 'done' : ''}" onclick="updateOrderStatus(${o.id}, '${isDone ? 'new' : 'done'}')">
           ${isDone ? '✓ Completed' : 'Mark as Done'}
         </button>
       </div>
@@ -2992,24 +3426,15 @@ function renderDashboard() {
       <div class="stat-card"><div class="stat-val">₹${totalRevenue}</div><div class="stat-label">Total Revenue</div></div>
     </div>
 
-    <div class="fruit-editor-section">
-      <div class="dash-section-title">🍎 Fruits ka Daily Price Update Karo</div>
-      <div class="fruit-price-grid" id="fruitPriceGrid">
-        ${renderFruitEditorRows()}
-      </div>
-      <button class="save-fruit-prices-btn" onclick="saveFruitPrices()">✅ Save All Fruit Prices</button>
-    </div>
-
     <div class="dash-section-title">📋 All Orders</div>
     <div class="date-filter-row">
       <span class="date-filter-label">Filter by Date:</span>
       <input type="date" class="date-filter-input" id="dashDateFilter" onchange="renderDashboard()" value="${filterDate || ''}">
-      <button class="clear-orders-btn" onclick="if(confirm('Saare orders delete karo?')){localStorage.removeItem('mkd_orders');renderDashboard();}">🗑 Clear All</button>
+      <button class="clear-orders-btn" onclick="clearAllOrders()">🗑 Clear All</button>
     </div>
     ${displayOrders.length === 0 ? '<div class="no-orders-msg">Koi order nahi mila 📭</div>' : ordersHtml}
   `;
 
-  // Restore date filter event
   const df = document.getElementById('dashDateFilter');
   if (df) df.addEventListener('change', renderDashboard);
 }
@@ -3018,16 +3443,26 @@ function checkPin() {
   const val = document.getElementById('pinInput')?.value;
   if (val === OWNER_PIN) {
     dashLoggedIn = true;
-    renderDashboard();
+    renderDashboard().catch(console.error);
   } else {
     document.getElementById('pinErr').textContent = '❌ Galat PIN. Dobara try karo.';
   }
 }
 
-// ─── FRUIT PRICE EDITOR ───
+async function clearAllOrders() {
+  if (!confirm('Saare orders delete karo?')) return;
+  try {
+    await supabaseFetch('orders?created_at=gte.2000-01-01', { method: 'DELETE' });
+    renderDashboard().catch(console.error);
+  } catch(e) {
+    showToast('❌ Delete nahi hua.');
+  }
+}
+
+// ─── FRUIT PRICE EDITOR (localStorage) ───
 const FRUIT_ITEMS = [
-  { key: 'banana',     emoji: '🍌', name: 'Fresh Banana',         defaultPrice: '5 per piece' },
-  { key: 'mixfruits',  emoji: '🥗', name: 'Mix Fruits',           defaultPrice: '' },
+  { key: 'banana',     emoji: '🍌', name: 'Fresh Banana',         defaultPrice: '5' },
+  { key: 'mixfruits',  emoji: '🍓', name: 'Mix Fruits',           defaultPrice: '' },
   { key: 'fruitplate', emoji: '🍽️', name: 'Seasonal Fruit Plate', defaultPrice: '80' },
   { key: 'papaya',     emoji: '🧡', name: 'Papaya Slice',         defaultPrice: '40' },
   { key: 'mango',      emoji: '🥭', name: 'Mango (Seasonal)',     defaultPrice: '60' },
@@ -3038,35 +3473,10 @@ function loadFruitPrices() {
   catch { return {}; }
 }
 
-function renderFruitEditorRows() {
-  const saved = loadFruitPrices();
-  return FRUIT_ITEMS.map(f => {
-    const val = saved[f.key] !== undefined ? saved[f.key] : f.defaultPrice;
-    return `
-      <div class="fruit-price-row">
-        <span class="fruit-price-emoji">${f.emoji}</span>
-        <span class="fruit-price-name">${f.name}</span>
-        <span class="fruit-price-label">₹</span>
-        <input class="fruit-price-input" id="fp_${f.key}" type="text" value="${val}" placeholder="Price">
-      </div>`;
-  }).join('');
-}
-
-function saveFruitPrices() {
-  const prices = {};
-  FRUIT_ITEMS.forEach(f => {
-    const el = document.getElementById('fp_' + f.key);
-    if (el) prices[f.key] = el.value.trim();
-  });
-  localStorage.setItem('mkd_fruit_prices', JSON.stringify(prices));
-  applyFruitPricesToMenu();
-  showToast('✅ Fruit prices update ho gaye! 🍎');
-}
-
 function applyFruitPricesToMenu() {
   const prices = loadFruitPrices();
   FRUIT_ITEMS.forEach(f => {
-    const el = document.querySelector(`.item-price[data-fruit-key="${f.key}"]`);
+    const el = document.querySelector('.item-price[data-fruit-key="' + f.key + '"]');
     if (!el) return;
     const val = prices[f.key] !== undefined ? prices[f.key] : f.defaultPrice;
     el.textContent = val ? '₹' + val : '₹–';
@@ -3081,12 +3491,12 @@ function openFruitEdit(key, name, emoji) {
   document.getElementById('fpEmoji').textContent = emoji;
   document.getElementById('fpTitle').textContent = name;
   const prices = loadFruitPrices();
-  const item = FRUIT_ITEMS.find(f => f.key === key);
+  const item = FRUIT_ITEMS.find(function(f){ return f.key === key; });
   const current = prices[key] !== undefined ? prices[key] : (item ? item.defaultPrice : '');
   const input = document.getElementById('fpInput');
   input.value = current;
   document.getElementById('fruitPopupOverlay').classList.add('open');
-  setTimeout(() => input.focus(), 100);
+  setTimeout(function(){ input.focus(); input.select(); }, 120);
 }
 
 function closeFruitEdit() {
@@ -3100,11 +3510,71 @@ function saveFruitEditPopup() {
   const prices = loadFruitPrices();
   prices[currentFruitEditKey] = val;
   localStorage.setItem('mkd_fruit_prices', JSON.stringify(prices));
-  // Update menu display immediately
-  const el = document.querySelector(`.item-price[data-fruit-key="${currentFruitEditKey}"]`);
+  const el = document.querySelector('.item-price[data-fruit-key="' + currentFruitEditKey + '"]');
   if (el) el.textContent = val ? '₹' + val : '₹–';
   closeFruitEdit();
   showToast('✅ Price update ho gaya! 🍎');
+}
+
+
+// ─── VEG PRICE EDITOR (localStorage) ───
+const VEG_ITEMS = [
+  { key: 'aloo',    emoji: '🥔', name: 'Aloo (Potato)',        defaultPrice: '30' },
+  { key: 'gazar',   emoji: '🥕', name: 'Gazar (Carrot)',       defaultPrice: '40' },
+  { key: 'pyaz',    emoji: '🧅', name: 'Pyaz (Onion)',         defaultPrice: '35' },
+  { key: 'lasan',   emoji: '🧄', name: 'Lasan (Garlic)',       defaultPrice: '20' },
+  { key: 'adrak',   emoji: '🫚', name: 'Adrak (Ginger)',       defaultPrice: '25' },
+  { key: 'bhindi',  emoji: '🫛', name: 'Bhindi (Lady Finger)', defaultPrice: '50' },
+  { key: 'palak',   emoji: '🥬', name: 'Palak (Spinach)',      defaultPrice: '30' },
+  { key: 'tamatar', emoji: '🍅', name: 'Tamatar (Tomato)',     defaultPrice: '30' },
+  { key: 'methi',   emoji: '🌿', name: 'Methi (Fenugreek)',    defaultPrice: '20' },
+];
+
+function loadVegPrices() {
+  try { return JSON.parse(localStorage.getItem('mkd_veg_prices') || '{}'); }
+  catch { return {}; }
+}
+
+function applyVegPricesToMenu() {
+  const prices = loadVegPrices();
+  VEG_ITEMS.forEach(function(v) {
+    const el = document.querySelector('.item-price[data-veg-key="' + v.key + '"]');
+    if (!el) return;
+    const val = prices[v.key] !== undefined ? prices[v.key] : v.defaultPrice;
+    el.textContent = val ? '₹' + val : '₹–';
+  });
+}
+
+let currentVegEditKey = null;
+
+function openVegEdit(key, name, emoji) {
+  currentVegEditKey = key;
+  document.getElementById('vpEmoji').textContent = emoji;
+  document.getElementById('vpTitle').textContent = name;
+  const prices = loadVegPrices();
+  const item = VEG_ITEMS.find(function(v){ return v.key === key; });
+  const current = prices[key] !== undefined ? prices[key] : (item ? item.defaultPrice : '');
+  const input = document.getElementById('vpInput');
+  input.value = current;
+  document.getElementById('vegPopupOverlay').classList.add('open');
+  setTimeout(function(){ input.focus(); input.select(); }, 120);
+}
+
+function closeVegEdit() {
+  document.getElementById('vegPopupOverlay').classList.remove('open');
+  currentVegEditKey = null;
+}
+
+function saveVegEditPopup() {
+  if (!currentVegEditKey) return;
+  const val = document.getElementById('vpInput').value.trim();
+  const prices = loadVegPrices();
+  prices[currentVegEditKey] = val;
+  localStorage.setItem('mkd_veg_prices', JSON.stringify(prices));
+  const el = document.querySelector('.item-price[data-veg-key="' + currentVegEditKey + '"]');
+  if (el) el.textContent = val ? '₹' + val : '₹–';
+  closeVegEdit();
+  showToast('✅ Sabzi ka price update ho gaya! 🥦');
 }
 
 // ─── CLOSE PANELS ON BACKDROP CLICK ───
@@ -3117,9 +3587,11 @@ document.addEventListener('DOMContentLoaded', function() {
   initMenuPrices();
   addOrderButtons();
   applyFruitPricesToMenu();
+  applyVegPricesToMenu();
 });
 
 </script>
+
 <!-- FRUIT PRICE EDIT POPUP -->
 <div class="fruit-popup-overlay" id="fruitPopupOverlay" onclick="if(event.target===this)closeFruitEdit()">
   <div class="fruit-popup-box">
@@ -3128,11 +3600,29 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="fruit-popup-sub">Naya price enter karo</div>
     <div class="fruit-popup-input-wrap">
       <span class="fruit-popup-rs">₹</span>
-      <input class="fruit-popup-input" id="fpInput" type="text" placeholder="jaise 50" onkeydown="if(event.key==='Enter')saveFruitEditPopup()">
+      <input class="fruit-popup-input" id="fpInput" type="number" min="0" placeholder="jaise 50" onkeydown="if(event.key==='Enter')saveFruitEditPopup()">
     </div>
     <div class="fruit-popup-btns">
       <button class="fruit-popup-cancel" onclick="closeFruitEdit()">Cancel</button>
       <button class="fruit-popup-save" onclick="saveFruitEditPopup()">✅ Save</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- VEG PRICE EDIT POPUP -->
+<div class="veg-popup-overlay" id="vegPopupOverlay" onclick="if(event.target===this)closeVegEdit()">
+  <div class="veg-popup-box">
+    <div class="veg-popup-emoji" id="vpEmoji">🥦</div>
+    <div class="veg-popup-title" id="vpTitle">Sabzi Name</div>
+    <div class="veg-popup-sub">Naya price enter karo (per kg / per bundle)</div>
+    <div class="veg-popup-input-wrap">
+      <span class="veg-popup-rs">₹</span>
+      <input class="veg-popup-input" id="vpInput" type="number" min="0" placeholder="jaise 40" onkeydown="if(event.key==='Enter')saveVegEditPopup()">
+    </div>
+    <div class="veg-popup-btns">
+      <button class="veg-popup-cancel" onclick="closeVegEdit()">Cancel</button>
+      <button class="veg-popup-save" onclick="saveVegEditPopup()">✅ Save</button>
     </div>
   </div>
 </div>
