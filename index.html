@@ -16,6 +16,7 @@
   --warm-gray: #8B7355;
   --border: #DDD0BB;
 }
+  
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -24,6 +25,36 @@ body {
   color: var(--charcoal);
   min-height: 100vh;
 }
+
+
+
+  
+  .fruit-popup-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.fruit-popup-box{
+  background:#fff;
+  padding:20px;
+  border-radius:16px;
+  width:320px;
+  max-width:90%;
+}
+
+.fruit-popup-input{
+  width:100%;
+  padding:10px;
+  font-size:16px;
+}
+
+
+  
 
 /* TOP STRIP */
 .top-strip {
@@ -2026,7 +2057,8 @@ footer span { color: var(--turmeric); }
   </div>
   <div class="menu-list">
 
-    <div class="menu-item" onclick="toggleItem(this)">
+    <!-- <div class="menu-item" onclick="toggleItem(this)"> -->
+    <div class="menu-item" onclick="toggleItem(this); openFruitEdit(this)">
       <div class="item-row">
         <img class="item-thumb" src="banana.jpg" alt="Fresh Banana" loading="lazy">
         <div class="item-dot"></div>
@@ -2058,7 +2090,8 @@ footer span { color: var(--turmeric); }
       </div>
     </div>
 
-    <div class="menu-item" onclick="toggleItem(this)">
+    <!-- <div class="menu-item" onclick="toggleItem(this)"> -->
+    <div class="menu-item" onclick="toggleItem(this); openFruitEdit(this)">
       <div class="item-row">
         <img class="item-thumb" src="fruit chat.jpg" alt="Mix Fruits" loading="lazy">
         <div class="item-dot"></div>
@@ -2088,7 +2121,8 @@ footer span { color: var(--turmeric); }
       </div>
     </div>
 
-    <div class="menu-item" onclick="toggleItem(this)">
+    <!-- <div class="menu-item" onclick="toggleItem(this)"> -->
+    <div class="menu-item" onclick="toggleItem(this); openFruitEdit(this)">
       <div class="item-row">
         <img class="item-thumb" src="seasonal fruit.jpg" alt="Seasonal Fruit Plate" loading="lazy">
         <div class="item-dot"></div>
@@ -2119,7 +2153,8 @@ footer span { color: var(--turmeric); }
       </div>
     </div>
 
-    <div class="menu-item" onclick="toggleItem(this)">
+    <!-- <div class="menu-item" onclick="toggleItem(this)"> -->
+    <div class="menu-item" onclick="toggleItem(this); openFruitEdit(this)">
       <div class="item-row">
         <img class="item-thumb" src="papaya slice.webp" alt="Papaya Slice" loading="lazy">
         <div class="item-dot"></div>
@@ -2149,7 +2184,8 @@ footer span { color: var(--turmeric); }
       </div>
     </div>
 
-    <div class="menu-item" onclick="toggleItem(this)">
+    <!-- <div class="menu-item" onclick="toggleItem(this)"> -->
+    <div class="menu-item" onclick="toggleItem(this); openFruitEdit(this)">
       <div class="item-row">
         <img class="item-thumb" src="mango.jpg" alt="Mango" loading="lazy">
         <div class="item-dot"></div>
@@ -2928,6 +2964,79 @@ async function clearAllOrders() {
 document.getElementById('orderOverlay').addEventListener('click', function(e) {
   if (e.target === this) closeOrderPanel();
 });
+
+
+
+
+  ////////////////
+  let currentFruitEl = null;
+
+function openFruitEdit(el) {
+  currentFruitEl = el;
+
+  const name = el.querySelector('.item-name')?.childNodes[0]?.textContent.trim();
+  const priceEl = el.querySelector('.item-price');
+
+  document.getElementById('fpTitle').textContent = name || 'Fruit';
+  document.getElementById('fpEmoji').textContent = '🍎';
+
+  let price = priceEl ? priceEl.textContent.replace('₹','').trim() : '';
+  document.getElementById('fpInput').value = price;
+
+  document.getElementById('fruitPopupOverlay').style.display = 'flex';
+}
+
+function closeFruitEdit() {
+  document.getElementById('fruitPopupOverlay').style.display = 'none';
+  currentFruitEl = null;
+}
+
+function saveFruitEditPopup() {
+  const val = document.getElementById('fpInput').value.trim();
+  if (!val || isNaN(val)) return;
+
+  if (currentFruitEl) {
+    let priceEl = currentFruitEl.querySelector('.item-price');
+
+    // agar price element nahi hai to create karo
+    if (!priceEl) {
+      priceEl = document.createElement('div');
+      priceEl.className = 'item-price';
+      currentFruitEl.querySelector('.item-body').appendChild(priceEl);
+    }
+
+    priceEl.textContent = '₹' + val;
+
+    // save to localStorage
+    const name = currentFruitEl.querySelector('.item-name')?.textContent.trim();
+    localStorage.setItem('fruit_' + name, val);
+  }
+
+  closeFruitEdit();
+}
+
+function applyFruitPricesToMenu() {
+  document.querySelectorAll('#fruits .menu-item').forEach(el => {
+    const name = el.querySelector('.item-name')?.textContent.trim();
+    const saved = localStorage.getItem('fruit_' + name);
+
+    if (saved) {
+      let priceEl = el.querySelector('.item-price');
+
+      if (!priceEl) {
+        priceEl = document.createElement('div');
+        priceEl.className = 'item-price';
+        el.querySelector('.item-body').appendChild(priceEl);
+      }
+
+      priceEl.textContent = '₹' + saved;
+    }
+  });
+}
+
+
+
+  ////////////////////
 
 // ─── INIT ───
 document.addEventListener('DOMContentLoaded', function() {
