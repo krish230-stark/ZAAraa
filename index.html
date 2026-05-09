@@ -1856,7 +1856,7 @@ footer span { color: var(--turmeric); }
 </div>
 
 <!-- FRUITS SECTION -->
-<div class="menu-section" id="fruits">
+<!-- <div class="menu-section" id="fruits">
   <div class="cat-header">
     <div class="cat-icon-wrap">🍎</div>
     <div>
@@ -1990,6 +1990,177 @@ footer span { color: var(--turmeric); }
         <div class="item-right">
           <div class="item-price">₹60</div>
           <div class="item-badge badge-new">SEASONAL</div>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="mango.jpg" alt="Mango">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Mango (Seasonal)</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Season mein taza aam – pura kaat ke serve honge. Aam ka sezon aaye aur yeh na khao toh kya faida! Available only in summer season.</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag red">☀️ Summer Only</span>
+            <span class="detail-tag">🥭 Seasonal</span>
+          </div>
+          <div class="detail-serves"><strong>Per plate</strong> – full sliced mango</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div> -->
+  
+<!-- </div> -->
+
+<!-- FRUITS SECTION -->
+<div class="menu-section" id="fruits">
+  <div class="cat-header">
+    <div class="cat-icon-wrap">🍎</div>
+    <div>
+      <div class="cat-title">Taze Phal</div>
+      <div class="cat-count">5 items • Seasonal & Fresh</div>
+    </div>
+  </div>
+  <div class="menu-list">
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="banana.jpg" alt="Fresh Banana" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Fresh banana <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">fresh and healthy </div>
+        </div>
+        <div class="item-right">
+          <div class="item-price" data-fruit-key="banana">₹5 per piece</div>
+          <div class="item-badge badge-best">POPULAR</div>
+          <button class="fruit-edit-btn" onclick="event.stopPropagation(); openFruitEdit('banana','Fresh Banana','🍌')">✏️ Edit Price</button>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="banana.jpg" alt="Fresh banana">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Banana (2 pcs)</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Fresh banana!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">💚 Healthy</span>
+            <span class="detail-tag">🌿 Seasonal</span>
+          </div>
+          <div class="detail-serves"><strong>2 pieces</strong> per serving </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="fruit chat.jpg" alt="Mix Fruits" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Mix Fruits <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Energy ke liye best</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price" data-fruit-key="mixfruits">₹</div>
+          <button class="fruit-edit-btn" onclick="event.stopPropagation(); openFruitEdit('mixfruits','Mix Fruits','🥗')">✏️ Edit Price</button>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="fruit chat.jpg" alt="Banana">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Fruit Chat</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Taze pake kele – energy ke liye best option. Students ke liye quick bite, gym ke baad perfect, ya bas kuch meetha khaana ho to!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">⚡ Quick Energy</span>
+          </div>
+          <div class="detail-serves"><strong></strong> </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="seasonal fruit.jpg" alt="Seasonal Fruit Plate" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Seasonal Fruit Plate <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Kaat ke plate mein</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price" data-fruit-key="fruitplate">₹80</div>
+          <button class="fruit-edit-btn" onclick="event.stopPropagation(); openFruitEdit('fruitplate','Seasonal Fruit Plate','🍽️')">✏️ Edit Price</button>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="seasonal fruit.jpg" alt="Seasonal Fruit Plate">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Seasonal Fruit Plate</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Jo bhi season mein taza ho – kaat ke plate mein serve hoga. Variety milegi, freshness guarantee hai!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">🌿 100% Fresh</span>
+            <span class="detail-tag">🌸 Seasonal</span>
+          </div>
+          <div class="detail-serves"><strong>Full plate</strong> – assorted fruits</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="papaya slice.webp" alt="Papaya Slice" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Papaya Slice <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Digestive ke liye</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price" data-fruit-key="papaya">₹40</div>
+          <button class="fruit-edit-btn" onclick="event.stopPropagation(); openFruitEdit('papaya','Papaya Slice','🧡')">✏️ Edit Price</button>
+        </div>
+      </div>
+      <div class="item-detail">
+        <div class="detail-photo-wrap">
+          <img src="papaya slice.webp" alt="Papaya Slice">
+          <div class="detail-photo-overlay"></div>
+          <div class="detail-photo-label">Papaya Slice</div>
+        </div>
+        <div class="detail-body">
+          <p class="detail-desc">Paka meetha papita – digestive ke liye perfect, khaane ke baad khao. Vitamins aur enzymes se bharpoor, sehat ke liye ek number!</p>
+          <div class="detail-meta">
+            <span class="detail-tag green">🌱 Pure Veg</span>
+            <span class="detail-tag green">💚 Post-Meal Best</span>
+          </div>
+          <div class="detail-serves"><strong>Per plate</strong> – generous portion</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="toggleItem(this)">
+      <div class="item-row">
+        <img class="item-thumb" src="mango.jpg" alt="Mango" loading="lazy">
+        <div class="item-dot"></div>
+        <div class="item-body">
+          <div class="item-name">Mango (Seasonal) <span class="expand-arrow">▼</span></div>
+          <div class="item-tagline">Season mein taza aam</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price" data-fruit-key="mango">₹60</div>
+          <div class="item-badge badge-new">SEASONAL</div>
+          <button class="fruit-edit-btn" onclick="event.stopPropagation(); openFruitEdit('mango','Mango (Seasonal)','🥭')">✏️ Edit Price</button>
         </div>
       </div>
       <div class="item-detail">
